@@ -1,0 +1,1656 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Qualche domanda sulla tua cassa malati: con i premi ufficiali UFSP 2027 la pagina ti dice se per il 2027 ti conviene cambiare, e perché.">
+<title>La tua cassa malati 2027</title>
+<script>
+  // tema scelto a mano (solo una comodità di questo dispositivo)
+  try { var t = localStorage.getItem("svag-lamal-tema"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+</script>
+<style>
+:root {
+  --bg: #FBF7F1; --card: #FFFFFF; --ink: #23302D; --muted: #586560; --line: #E8E0D3;
+  --accent: #0B7466; --accent-ink: #FFFFFF; --accent-soft: #E0F1EC;
+  --warm: #B34A22; --warm-soft: #FCEADF; --ok: #2C7349; --ok-soft: #E2F2E7;
+  --gold: #8A6420; --gold-soft: #F7EDD6; --off: #F3EDE3;
+  --serie-premi: #00897B; --serie-spese: #C8552A;
+  --ombra: 0 1px 2px rgba(60, 40, 20, .05), 0 8px 22px rgba(60, 40, 20, .07);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141A19; --card: #1D2523; --ink: #ECEFEC; --muted: #A7B2AE; --line: #303A37;
+    --accent: #4FBFAE; --accent-ink: #0C1412; --accent-soft: #1B3430;
+    --warm: #F09A72; --warm-soft: #3A251E; --ok: #76CF99; --ok-soft: #1A3123;
+    --gold: #E0BC72; --gold-soft: #362E1E; --off: #232C2A;
+    --serie-premi: #17A08E; --serie-spese: #DD7038;
+    --ombra: none;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141A19; --card: #1D2523; --ink: #ECEFEC; --muted: #A7B2AE; --line: #303A37;
+  --accent: #4FBFAE; --accent-ink: #0C1412; --accent-soft: #1B3430;
+  --warm: #F09A72; --warm-soft: #3A251E; --ok: #76CF99; --ok-soft: #1A3123;
+  --gold: #E0BC72; --gold-soft: #362E1E; --off: #232C2A;
+  --serie-premi: #17A08E; --serie-spese: #DD7038;
+  --ombra: none;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; color: var(--ink);
+  background: radial-gradient(900px 340px at 50% -140px, var(--warm-soft), transparent 75%) no-repeat, var(--bg);
+  font: 17px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  overflow-x: hidden;
+}
+.wrap { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+header.top { padding-top: 14px; padding-bottom: 6px; }
+.testa { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.marca { font-size: 15px; color: var(--muted); line-height: 1.3; }
+.marca b { color: var(--ink); font-weight: 650; }
+button.tema {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px; border: 1.5px solid var(--line);
+  background: var(--card); color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0;
+}
+.avanz { height: 6px; background: var(--line); border-radius: 3px; margin-top: 12px; overflow: hidden; }
+.avanz > i { display: block; height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--warm)); transition: width .3s; }
+main:focus { outline: none; }
+#app { overflow-wrap: break-word; }
+.passo-anim { animation: entra .28s ease-out; }
+@keyframes entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .passo-anim { animation: none; } .avanz > i { transition: none; } }
+
+h1 { font-size: 28px; line-height: 1.2; margin: 6px 0 8px; letter-spacing: -.01em; }
+h2.q { font-size: 24px; line-height: 1.25; margin: 2px 0 8px; letter-spacing: -.005em; }
+h3 { font-size: 21px; line-height: 1.3; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
+h3 .h-ico { color: var(--accent); display: inline-grid; }
+p { margin: 0 0 12px; }
+.sotto { color: var(--muted); margin: 0 0 14px; }
+.aiuto { color: var(--muted); font-size: 16px; margin: 0 0 18px; }
+.nota { color: var(--muted); font-size: 15px; }
+.q-ico, .hero-ico {
+  width: 56px; height: 56px; border-radius: 18px; background: var(--accent-soft); color: var(--accent);
+  display: grid; place-items: center; margin: 20px 0 12px;
+}
+.hero-ico { width: 64px; height: 64px; border-radius: 22px; background: var(--warm-soft); color: var(--warm); margin-top: 24px; }
+ul.punti, ol.punti { padding-left: 22px; margin: 0 0 16px; }
+ul.punti li, ol.punti li { margin-bottom: 8px; }
+.tiles { display: grid; gap: 10px; margin: 18px 0; }
+@media (min-width: 560px) { .tiles { grid-template-columns: 1fr 1fr 1fr; } }
+.tile { display: flex; gap: 12px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; box-shadow: var(--ombra); }
+.tile .t-ico { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.tile b { display: block; font-size: 16px; line-height: 1.3; }
+.tile span.s { display: block; font-size: 15px; color: var(--muted); line-height: 1.3; }
+
+.box { background: var(--accent-soft); border-radius: 14px; padding: 14px 16px; margin: 14px 0; }
+.box.oro { background: var(--gold-soft); }
+.box.caldo { background: var(--warm-soft); }
+.box.neutro { background: var(--off); }
+.box ul { margin: 8px 0 0; padding-left: 20px; }
+.box li { margin-bottom: 6px; }
+.box .tit { font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.box p:last-child { margin-bottom: 0; }
+.box.privacy li { font-size: 16px; }
+
+/* scelte */
+.opzioni { display: grid; gap: 10px; }
+.griglia { grid-template-columns: 1fr 1fr; }
+@media (min-width: 620px) { .griglia.tre { grid-template-columns: 1fr 1fr 1fr; } }
+.griglia .largo { grid-column: 1 / -1; }
+.opz {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 60px; padding: 12px 14px 12px 16px;
+  font: inherit; text-align: left; line-height: 1.3; background: var(--card); color: var(--ink);
+  border: 1.5px solid var(--line); border-radius: 16px; cursor: pointer; box-shadow: var(--ombra);
+  transition: border-color .15s, background-color .15s, transform .08s;
+  -webkit-tap-highlight-color: transparent;
+}
+.opz:active { transform: scale(.985); }
+.opz .oi { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--off); color: var(--accent); }
+.opz .ot { flex: 1 1 auto; min-width: 0; }
+.opz .ot b { display: block; font-weight: 650; }
+.opz .ot small { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; font-weight: 400; }
+.opz .spunta { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 999px; border: 2px solid var(--line); display: grid; place-items: center; color: transparent; }
+.opz.multi .spunta { border-radius: 8px; }
+.opz[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.opz[aria-pressed="true"] .oi { background: var(--card); }
+.opz[aria-pressed="true"] .spunta { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.opz.compatta { min-height: 56px; padding: 10px 12px 10px 14px; gap: 10px; }
+.opz.compatta .spunta { width: 22px; height: 22px; }
+.opz.nonso { background: transparent; border-style: dashed; box-shadow: none; min-height: 54px; }
+.opz:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sotto-dom { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+.q2 { font-size: 20px; font-weight: 700; line-height: 1.3; margin: 0 0 6px; }
+.dom2 { margin: 0 0 22px; }
+.lbl2 { font-weight: 650; font-size: 18px; line-height: 1.35; }
+.aiuto2 { color: var(--muted); font-size: 15px; margin: 2px 0 10px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  font: inherit; font-size: 16px; min-height: 48px; padding: 10px 18px; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid var(--line); background: var(--card); color: var(--ink); -webkit-tap-highlight-color: transparent;
+}
+.pill[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 600; }
+
+/* campi */
+.campo-grande {
+  font: inherit; font-size: 26px; font-weight: 650; letter-spacing: .04em; width: 100%; max-width: 240px;
+  padding: 12px 16px; border-radius: 14px; border: 2px solid var(--line); background: var(--card); color: var(--ink);
+}
+.campo-grande:focus { outline: none; border-color: var(--accent); }
+.riga-campo { display: flex; align-items: center; gap: 10px 12px; flex-wrap: wrap; }
+.num-w { position: relative; flex: 0 1 260px; }
+.num-w .cur { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 17px; pointer-events: none; }
+.num-w .campo-grande { padding-left: 62px; text-align: right; max-width: none; }
+.unita-t { color: var(--muted); }
+.esito-campo { min-height: 1.5em; margin: 12px 0 0; font-size: 16px; display: flex; gap: 8px; align-items: flex-start; }
+.esito-campo svg { flex: 0 0 auto; margin-top: 2px; }
+.esito-campo.ok { color: var(--ok); }
+.esito-campo.err { color: var(--warm); font-weight: 600; }
+.chip { display: inline-block; padding: 2px 10px; border-radius: 999px; background: var(--warm-soft); color: var(--warm); font-size: 15px; font-weight: 650; }
+.chip-riga { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 16px; color: var(--muted); }
+label.campo { display: block; font-weight: 650; margin: 18px 0 6px; }
+input.testo { width: 100%; font: inherit; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
+input.testo:focus { outline: none; border-color: var(--accent); }
+
+/* risultato */
+.verdetto { border-radius: 24px; padding: 20px 18px 18px; margin: 16px 0 6px; background: var(--warm-soft); }
+.verdetto.bene { background: var(--ok-soft); }
+.verdetto.dipende { background: var(--gold-soft); }
+.verdetto .v-testa { display: flex; align-items: center; gap: 10px; color: var(--warm); font-weight: 700; font-size: 16px; }
+.verdetto.bene .v-testa { color: var(--ok); }
+.verdetto.dipende .v-testa { color: var(--gold); }
+.verdetto .v-tit { font-size: 26px; font-weight: 750; line-height: 1.2; margin: 10px 0 4px; letter-spacing: -.01em; }
+.verdetto .v-pre { font-size: 18px; font-weight: 600; margin: 6px 0 0; }
+.verdetto .v-cifra { font-size: 52px; font-weight: 750; line-height: 1.05; letter-spacing: -.02em; margin: 2px 0 0; }
+.verdetto .v-cifra small { font-size: 18px; font-weight: 600; letter-spacing: 0; color: var(--muted); }
+.verdetto .v-sotto { font-size: 16px; margin: 8px 0 0; }
+.perche { list-style: none; padding: 0; margin: 14px 0 0; }
+.perche li { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 10px; }
+.perche li svg { flex: 0 0 auto; margin-top: 3px; color: var(--accent); }
+.sez { margin-top: 30px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; box-shadow: var(--ombra); }
+table { width: 100%; border-collapse: collapse; }
+td, th { padding: 9px 4px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 16px; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 15px; color: var(--muted); font-weight: 600; }
+td.n, th.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+td.k { color: var(--muted); width: 42%; }
+tr.forte td { font-weight: 700; font-size: 18px; }
+.alt { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 10px 0; }
+.alt .rk { grid-row: span 3; width: 34px; height: 34px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 750; display: grid; place-items: center; }
+.alt .a-nome { font-weight: 700; font-size: 18px; line-height: 1.3; }
+.alt .a-prod { color: var(--muted); font-size: 16px; line-height: 1.35; }
+.alt .a-cifre { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 14px; margin-top: 8px; align-items: baseline; }
+.alt .a-mese { font-weight: 650; }
+.alt .a-risp { font-weight: 700; color: var(--ok); }
+.alt .a-risp.piu { color: var(--muted); font-weight: 600; }
+.tag { display: inline-block; font-size: 15px; padding: 1px 10px; border-radius: 999px; background: var(--off); color: var(--muted); font-weight: 600; margin-left: 4px; }
+.legenda { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 15px; color: var(--muted); margin: 4px 0 8px; }
+.legenda i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
+.legenda i.p { background: var(--serie-premi); }
+.legenda i.s { background: var(--serie-spese); }
+#grafico { width: 100%; }
+svg.graf { display: block; overflow: visible; }
+svg.graf text { font-family: inherit; font-size: 15px; fill: var(--ink); }
+svg.graf text.forte { font-weight: 700; }
+svg.graf text.debole { fill: var(--muted); }
+svg.graf .s-premi { fill: var(--serie-premi); }
+svg.graf .s-spese { fill: var(--serie-spese); }
+svg.graf .evid { fill: var(--ok-soft); }
+svg.graf .spunta-g { stroke: var(--ok); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+svg.graf .hit { fill: transparent; cursor: pointer; }
+.tip {
+  position: fixed; z-index: 30; max-width: 270px; padding: 9px 12px; border-radius: 12px; pointer-events: none;
+  background: var(--ink); color: var(--bg); font-size: 15px; line-height: 1.4; box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+}
+.date-tab td.n { font-weight: 700; }
+.passi { counter-reset: p; list-style: none; padding: 0; margin: 14px 0 0; }
+.passi li { counter-increment: p; position: relative; padding: 0 0 14px 46px; }
+.passi li::before {
+  content: counter(p); position: absolute; left: 0; top: -2px; width: 32px; height: 32px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink); font-weight: 750; display: grid; place-items: center;
+}
+.passi li b { display: block; }
+details { margin: 12px 0; }
+details summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 16px; padding: 6px 0; }
+pre { white-space: pre-wrap; word-break: break-all; background: var(--off); padding: 12px; border-radius: 10px; font-size: 15px; }
+.risposte td.n a { color: var(--accent); font-size: 16px; }
+.azioni { display: grid; gap: 10px; margin: 18px 0; }
+button.primario, button.secondario {
+  font: inherit; font-weight: 650; border-radius: 14px; padding: 15px 18px; cursor: pointer; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+button.primario { background: var(--accent); color: var(--accent-ink); border: 0; font-size: 18px; }
+button.secondario { background: var(--card); color: var(--ink); border: 1.5px solid var(--line); }
+button.link { font: inherit; font-size: 16px; background: transparent; border: 0; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; cursor: pointer; text-align: left; }
+.esito { font-weight: 600; color: var(--accent); min-height: 1.5em; }
+.vuoto { text-align: center; padding: 48px 0; color: var(--muted); }
+
+nav.barra {
+  position: fixed; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 10;
+  border-top: 1px solid var(--line); padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+}
+nav.barra .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+nav.barra button { font: inherit; font-weight: 650; border-radius: 14px; padding: 12px 16px; min-width: 112px; min-height: 48px; cursor: pointer; }
+#indietro { background: transparent; border: 1.5px solid var(--line); color: var(--ink); }
+#avanti { background: var(--accent); border: 0; color: var(--accent-ink); }
+nav.barra .invisibile { visibility: hidden; }
+#passo { font-size: 15px; color: var(--muted); text-align: center; }
+@media print {
+  nav.barra, button.tema, .invio, .tip { display: none !important; }
+  body { padding: 0; background: #fff; }
+  .opz, .card, .tile { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <div class="testa">
+    <div class="marca"><b>Giorgio Carrara</b><br>consulenza patrimoniale SVAG</div>
+    <button class="tema" id="tema" type="button" aria-label="Cambia tema chiaro o scuro"></button>
+  </div>
+  <div class="avanz" aria-hidden="true"><i id="avanz"></i></div>
+</header>
+<main class="wrap" id="app" tabindex="-1"><p class="vuoto">Carico i premi 2027…</p></main>
+<nav class="barra" aria-label="Navigazione">
+  <div class="wrap">
+    <button id="indietro" type="button">← Indietro</button>
+    <span id="passo"></span>
+    <button id="avanti" type="button">Avanti →</button>
+  </div>
+</nav>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+  // «La tua cassa malati 2027: ti conviene cambiare?», versione 1.0 (19.10.2026).
+  // Pagina statica: legge i premi UFSP 2027 del Ticino da dati/ e fa i conti sul dispositivo di chi la apre.
+  // Non trasmette niente: le risposte partono solo se è la persona a mandarle a Giorgio.
+  var VERSIONE = "1.0";
+  var DESTINATARIO = "giorgio.carrara@svag.ch";
+  var WHATSAPP = "41788716900", WHATSAPP_LEGGIBILE = "+41 78 871 69 00";
+  var CHIAVE = "svag-lamal-2027-v1";          // «Cancella» toglie solo questa chiave
+  var CHIAVE_TEMA = "svag-lamal-tema";
+  var ANNO = 2027;
+  var SOGLIA = 120;                           // sotto CHF 120 all'anno il cambio non vale la pena
+  var SPESE = { basso: 500, medio: 2000, alto: 6000 };   // ipotesi di fatture mediche all'anno, dichiarate nella pagina
+  var LIVELLI = { basso: "poche spese", medio: "spese medie", alto: "molte spese" };
+  var ALIQ_MAX = { E: 700, J: 700, K: 350 };  // aliquota del 10 %, tetto annuo
+  var DATE = {
+    raccomandata: "venerdì 13.11.2026", arrivo: "lunedì 30.11.2026",
+    alzare: "giovedì 31.12.2026", inizio: "venerdì 01.01.2027"
+  };
+  // Chi manda la pagina: testo generico, senza nomi (la pagina è pubblica).
+  var INTRO_CHI = "Seguo già il tuo compagno e mi ha chiesto di dare un’occhiata anche alla tua cassa malati.";
+
+  var app = document.getElementById("app");
+  function $(id) { return document.getElementById(id); }
+  var D = null, NPA = null, CASSE = [];
+
+  // ── icone (tratto semplice, colore del testo)
+  var ICONE = {
+    cuore: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+    cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    pin: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    lavoro: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
+    scudo: '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M12 8.5v6M9 11.5h6"/>',
+    steto: '<path d="M6 3v6a5 5 0 0 0 10 0V3"/><path d="M11 14v2a4 4 0 0 0 8 0v-1"/><circle cx="19" cy="13" r="2"/>',
+    doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+    busta: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    monete: '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
+    pulse: '<path d="M3 12h4l2-5 4 10 2-5h6"/>',
+    piu: '<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    okcerchio: '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',
+    giu: '<circle cx="12" cy="12" r="9"/><path d="M12 7v9M8 12.5l4 4 4-4"/>',
+    domanda: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.6v.6M12 17h.01"/>',
+    telefono: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+    gruppo: '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2A5 5 0 0 1 21 19"/>',
+    medico: '<circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M12 14v4M10 16h4"/>',
+    bussola: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+    farmacia: '<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/>',
+    altro: '<path d="M4 7h11M4 17h7"/><circle cx="18" cy="7" r="2.5"/><circle cx="14" cy="17" r="2.5"/>',
+    dente: '<path d="M7.5 3C5 3 3.5 5 3.5 7.5c0 2 1 3.5 1.6 5.2.6 1.8.7 3.6 1.1 5.4.3 1.4.8 2.9 1.9 2.9s1.5-1.5 1.8-3c.3-1.4.7-2.8 2.1-2.8s1.8 1.4 2.1 2.8c.3 1.5.7 3 1.8 3s1.6-1.5 1.9-2.9c.4-1.8.5-3.6 1.1-5.4.6-1.7 1.6-3.2 1.6-5.2C20.5 5 19 3 16.5 3c-1.8 0-2.8 1-4.5 1S9.3 3 7.5 3z"/>',
+    ospedale: '<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M12 7v6M9 10h6M10 21v-4h4v4"/>',
+    nessuna: '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>',
+    orologio: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    lucchetto: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+    chat: '<path d="M4 20l1.4-4A8 8 0 1 1 8.5 19z"/>',
+    copia: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+    sole: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    luna: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+    calcheck: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/>',
+    info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>'
+  };
+  function ico(n, s) {
+    s = s || 24;
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (ICONE[n] || "") + '</svg>';
+  }
+
+  // ── tema chiaro e scuro: segue il telefono, il pulsante lo cambia su questo dispositivo
+  function temaAttuale() {
+    var t = document.documentElement.getAttribute("data-theme");
+    if (t === "light" || t === "dark") return t;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function disegnaTema() {
+    var b = $("tema"), scuro = temaAttuale() === "dark";
+    b.innerHTML = ico(scuro ? "sole" : "luna", 20);
+    b.setAttribute("aria-label", scuro ? "Passa al tema chiaro" : "Passa al tema scuro");
+  }
+  $("tema").addEventListener("click", function () {
+    var nuovo = temaAttuale() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", nuovo);
+    try { localStorage.setItem(CHIAVE_TEMA, nuovo); } catch (e) {}
+    disegnaTema();
+  });
+  disegnaTema();
+  try { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", disegnaTema); } catch (e) {}
+
+  // ── numeri: accetta 485.30, 485,30 e CHF 1'234.50
+  function norm(t) {
+    t = String(t == null ? "" : t).replace(/chf|fr\.?/ig, "").replace(/[\s'’]/g, "");
+    if (t === "") return "";
+    if (/^\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, "");
+    else if (/^\d{1,3}(,\d{3})+$/.test(t)) t = t.replace(/,/g, "");
+    else if (t.indexOf(",") >= 0 && t.indexOf(".") < 0) t = t.replace(",", ".");
+    if (!/^\d*\.?\d*$/.test(t) || t === ".") return null;
+    var n = Number(t);
+    if (!isFinite(n) || n < 0) return null;
+    return String(Math.round(n * 100) / 100);
+  }
+  function fmt(n, dec) {
+    var f = Math.abs(n).toFixed(dec ? 2 : 0).split(".");
+    f[0] = f[0].replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    return (n < 0 ? "-" : "") + f.join(".");
+  }
+  function chf(n, dec) { return "CHF " + fmt(dec ? n : Math.round(n), dec); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function due(n) { return ("0" + n).slice(-2); }
+  function adesso() {
+    var d = new Date();
+    return due(d.getDate()) + "." + due(d.getMonth() + 1) + "." + d.getFullYear() + " " + due(d.getHours()) + ":" + due(d.getMinutes());
+  }
+
+  // ── dati
+  function carica(u) { return fetch(u).then(function (x) { if (!x.ok) throw new Error(u); return x.json(); }); }
+  Promise.all([carica("dati/premi_ti_2027.json"), carica("dati/npa_ti_2027.json")]).then(function (r) {
+    D = r[0]; NPA = r[1];
+    if (!D || !D.assicuratori || !NPA || !NPA.npa) throw new Error("dati");
+    avvia();
+  }).catch(function () {
+    app.innerHTML = '<div class="vuoto"><p>La pagina non si è caricata del tutto.</p><p>Ricaricala tra un attimo. Se non va, scrivi a Giorgio: ' +
+      WHATSAPP_LEGGIBILE + '.</p></div>';
+  });
+
+  function chiaveOrd(s) { return String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+
+  // ── categorie di modello
+  function cat(p) {
+    if (p.t === "BASE") return "libero";
+    if (p.t === "HAM") return "medico";
+    if (p.t === "HMO") return "hmo";
+    var d = String(p.d || "").toLowerCase();
+    if (d.indexOf("farmacia") === 0) return "farmacia";
+    if (d.indexOf("telemedicina") === 0) return "tel";
+    return "flex";
+  }
+  var NOMI_CAT = { libero: "Modello standard", medico: "Medico di famiglia", hmo: "Rete HMO", tel: "Telmed (telefono o app)", farmacia: "Farmacia come primo passo", flex: "Modello flessibile" };
+  var PRIMO_PASSO = {
+    libero: "vai direttamente da qualsiasi medico",
+    medico: "vai prima dal medico di famiglia che scegli dalla lista della cassa",
+    hmo: "vai prima nello studio medico di gruppo della rete",
+    tel: "prima telefoni a una centrale medica o usi l’app della cassa",
+    farmacia: "passi prima in una farmacia della lista",
+    flex: "ogni volta scegli tu il primo passo fra quelli della cassa: medico, telefono o farmacia"
+  };
+  // nome del modello dentro una frase: «il modello …»
+  var MOD_FRASE = { libero: "standard", medico: "medico di famiglia", hmo: "rete HMO", tel: "Telmed", farmacia: "farmacia", flex: "flessibile" };
+  var MOD_MINUSC = { libero: "modello standard", medico: "medico di famiglia", hmo: "rete HMO", tel: "Telmed (telefono o app)", farmacia: "farmacia come primo passo", flex: "modello flessibile" };
+  var ICO_CAT = { libero: "bussola", medico: "medico", hmo: "gruppo", tel: "telefono", farmacia: "farmacia", flex: "altro" };
+  var NOMI_FASCIA = { E: "fascia adulti (26 anni e più)", J: "fascia giovani adulti (19-25 anni)", K: "fascia bambini (0-18 anni)" };
+
+  // ── #pre=npa:6964 (solo il numero postale, eventualmente il comune: mai nomi né altri dati)
+  var PRE = null;
+  function leggiPre() {
+    var m = /(?:^|[#&])pre=([^&]*)/.exec(location.hash);
+    if (!m || !m[1]) return;
+    var t; try { t = decodeURIComponent(m[1]); } catch (e) { return; }
+    var p = {};
+    t.split(/[;,]/).forEach(function (pezzo) {
+      var kv = pezzo.split(":"); if (kv.length !== 2) return;
+      var k = kv[0].trim().toLowerCase(), v = kv[1].trim();
+      if (k === "npa" && /^\d{4}$/.test(v) && NPA.npa[v]) p.npa = v;
+      if (k === "comune" && /^\d{4}$/.test(v)) p.bfs = Number(v);
+    });
+    if (!p.npa) return;
+    if (p.bfs && !NPA.npa[p.npa].some(function (c) { return c.bfs === p.bfs; })) delete p.bfs;
+    p.firma = "npa:" + p.npa + (p.bfs ? ";comune:" + p.bfs : "");
+    PRE = p;
+  }
+
+  // ── stato, conservato solo su questo dispositivo
+  function statoVuoto() {
+    return { v: 1, passo: "benvenuto", nascita: "", npa: "", bfs: null, npaPre: false, preFirma: "",
+      lavoro: null, infOggi: null, cassa: null, modello: null, prodotto: null, franchigia: null, lettera: "",
+      pref: [], visite: null, farmaci: null, cure: null, compl: [], livello: null, nome: "" };
+  }
+  function applicaPre(st) {
+    if (!PRE) return st;
+    st.npa = PRE.npa; st.bfs = PRE.bfs || null; st.npaPre = true; st.preFirma = PRE.firma;
+    return st;
+  }
+  var S = statoVuoto(), ripreso = false;
+  function leggiStato() {
+    var sv = null;
+    try { sv = JSON.parse(localStorage.getItem(CHIAVE) || "null"); } catch (e) { sv = null; }
+    if (sv && typeof sv === "object" && sv.v === 1) {
+      var base = statoVuoto();
+      Object.keys(base).forEach(function (k) { if (sv[k] !== undefined && sv[k] !== null) base[k] = sv[k]; });
+      if (!Array.isArray(base.pref)) base.pref = [];
+      if (!Array.isArray(base.compl)) base.compl = [];
+      S = base;
+      if (PRE && S.preFirma !== PRE.firma) {   // link nuovo: il NPA proposto entra solo se non ce n'è già uno
+        if (!S.npa) { S.npa = PRE.npa; S.bfs = PRE.bfs || null; S.npaPre = true; }
+        S.preFirma = PRE.firma;
+      }
+      if (!trovaPasso(S.passo)) S.passo = "benvenuto";
+      ripreso = S.passo !== "benvenuto";
+    } else {
+      S = applicaPre(statoVuoto());
+    }
+  }
+  function vuoto() {
+    return S.passo === "benvenuto" && !S.nascita && !S.nome && !S.lavoro && !S.cassa && !S.modello && !S.franchigia &&
+      !S.lettera && !S.pref.length && !S.compl.length && !S.visite && !S.farmaci && !S.cure && (!S.npa || S.npaPre);
+  }
+  var tSalva = null;
+  function salvaSubito() {
+    clearTimeout(tSalva);
+    try {
+      if (vuoto()) localStorage.removeItem(CHIAVE);   // niente da conservare → niente nel browser
+      else localStorage.setItem(CHIAVE, JSON.stringify(S));
+    } catch (e) { /* archivio non disponibile: si lavora senza */ }
+  }
+  function salva() { clearTimeout(tSalva); tSalva = setTimeout(salvaSubito, 300); }
+  window.addEventListener("pagehide", salvaSubito);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") salvaSubito(); });
+
+  // ── conti
+  function eta() {
+    if (!/^\d{4}$/.test(S.nascita)) return null;
+    var y = Number(S.nascita);
+    if (y < 1900 || y > ANNO) return null;
+    return ANNO - y;
+  }
+  function fascia() { var e = eta(); if (e === null) return null; return e <= 18 ? "K" : e <= 25 ? "J" : "E"; }
+  function franchigie(fa) { return (D.franchigie && D.franchigie[fa]) || []; }
+  function comuniNpa() { return S.npa && NPA.npa[S.npa] ? NPA.npa[S.npa] : null; }
+  function regioniDi(cs) { var r = []; cs.forEach(function (c) { if (r.indexOf(c.r) < 0) r.push(c.r); }); return r; }
+  function luogo() {
+    var cs = comuniNpa(); if (!cs) return null;
+    if (S.bfs) { var f = cs.filter(function (c) { return c.bfs === S.bfs; })[0]; if (f) return f; }
+    if (cs.length === 1) return cs[0];
+    var regs = regioniDi(cs);
+    if (regs.length === 1) {
+      var nomi = []; cs.forEach(function (c) { if (nomi.indexOf(c.c) < 0) nomi.push(c.c); });
+      return { c: nomi.length > 1 ? nomi.slice(0, -1).join(", ") + " o " + nomi[nomi.length - 1] : nomi[0], r: regs[0], bfs: null, l: cs[0].l, multi: true };
+    }
+    return null;   // il NPA cade su due regioni: decide il comune
+  }
+  function regione() { var l = luogo(); return l ? String(l.r) : null; }
+  function dove(l) {
+    if (l.multi) return "Comuni di " + l.c;
+    var loc = l.l && l.l.length ? l.l.join(", ") : l.c;
+    return loc === l.c ? loc : loc + " (Comune di " + l.c + ")";
+  }
+  function isCassa(v) { return !!(v && v !== "nonso" && D.assicuratori[v]); }
+  function prodotti(num) {
+    var a = D.assicuratori[num]; if (!a) return [];
+    return Object.keys(a.prodotti).map(function (c) { return { code: c, p: a.prodotti[c], cat: cat(a.prodotti[c]) }; });
+  }
+  function filtraModello(lista, mod) {
+    if (!mod || mod === "nonso") return lista;
+    return lista.filter(function (x) { return mod === "altro" ? (x.cat === "flex" || x.cat === "farmacia") : x.cat === mod; });
+  }
+  function prodottiFiltrati() { return isCassa(S.cassa) ? filtraModello(prodotti(S.cassa), S.modello) : []; }
+  function prodScelto() {
+    if (!isCassa(S.cassa)) return null;
+    if (S.prodotto === "nonso") return null;
+    if (S.prodotto && D.assicuratori[S.cassa].prodotti[S.prodotto]) return S.prodotto;
+    var f = prodottiFiltrati(); return f.length === 1 ? f[0].code : null;
+  }
+  function premio(num, code, reg, fa, fr, inf) {
+    var a = D.assicuratori[num]; if (!a) return null;
+    var p = a.prodotti[code]; if (!p) return null;
+    var l = p.p[reg] && p.p[reg][fa] && p.p[reg][fa][inf]; if (!l) return null;
+    var i = franchigie(fa).indexOf(fr); if (i < 0) return null;
+    return typeof l[i] === "number" ? l[i] : null;
+  }
+  function nomeCassa(num) { return D.assicuratori[num] ? D.assicuratori[num].nome : ""; }
+  function nomeProd(num, code, corto) {
+    var a = D.assicuratori[num]; if (!a || !a.prodotti[code]) return "";
+    var n = a.prodotti[code].n;
+    if (corto && a.prodotti[code].t === "BASE") return "Modello standard";
+    if (corto && n.toLowerCase().indexOf(a.nome.toLowerCase() + " ") === 0) n = n.slice(a.nome.length + 1);
+    return n;
+  }
+  // premi della lettera: dove combaciano con i dati UFSP (al centesimo)
+  function corrispondenze(P, reg, fa) {
+    var out = []; if (P === null || !reg || !fa) return out;
+    var frs = franchigie(fa);
+    var frOk = (typeof S.franchigia === "number" && frs.indexOf(S.franchigia) >= 0) ? [S.franchigia] : frs;
+    var infs = S.infOggi === "si" ? ["U"] : S.infOggi === "no" ? ["N"] : S.lavoro === "no" ? ["U"] : ["N", "U"];
+    var nota = isCassa(S.cassa), nums = nota ? [S.cassa] : Object.keys(D.assicuratori);
+    var ps = prodScelto();
+    nums.forEach(function (num) {
+      // cassa non nota: si cerca in tutto il mercato, ma solo fra i prodotti del modello che hai detto
+      var lista = nota ? prodotti(num) : filtraModello(prodotti(num), S.modello);
+      lista.forEach(function (x) {
+        if (ps && num === S.cassa && x.code !== ps) return;
+        frOk.forEach(function (f) {
+          infs.forEach(function (inf) {
+            var v = premio(num, x.code, reg, fa, f, inf);
+            if (v !== null && Math.abs(v - P) < 0.005) out.push({ num: num, code: x.code, fr: f, inf: inf });
+          });
+        });
+      });
+    });
+    return out;
+  }
+  function comune(lista, k) {
+    if (!lista.length) return undefined;
+    var v = lista[0][k];
+    for (var i = 1; i < lista.length; i++) if (lista[i][k] !== v) return undefined;
+    return v;
+  }
+  function accettati() {
+    var a = {};
+    S.pref.forEach(function (k) { a[k] = true; });
+    if (S.pref.length) return a;
+    var m = S.modello;   // senza risposta: il modello di oggi
+    if (m === "libero" || m === "medico" || m === "hmo" || m === "tel") a[m] = true;
+    else if (m === "altro") { a.medico = true; a.tel = true; a.farmacia = true; }
+    else { a.libero = true; a.medico = true; a.hmo = true; a.tel = true; a.farmacia = true; }
+    a._default = true;
+    return a;
+  }
+  function compatibile(c, a) {
+    if (c === "libero") return true;                 // il modello standard va bene a tutti
+    if (c === "flex") return !!(a.medico || a.tel);  // nel flessibile il primo passo lo scegli tu
+    return !!a[c];
+  }
+  function livello() {
+    if (S.cure === "si" || (S.visite === "6+" && S.farmaci === "si")) return "alto";
+    if (S.visite === "2-5" || S.visite === "6+" || S.farmaci === "si" || S.visite === "nonso") return "medio";
+    if (S.visite === "0-1") return "basso";
+    return "medio";
+  }
+  function alternative(R, F, inf, acc) {
+    if (!R.reg || !R.fa || F === null) return [];
+    var perCassa = {};
+    Object.keys(D.assicuratori).forEach(function (num) {
+      prodotti(num).forEach(function (x) {
+        if (!compatibile(x.cat, acc)) return;
+        if (num === R.cassa && x.code === R.prod) return;      // la polizza di oggi non è un'alternativa
+        var v = premio(num, x.code, R.reg, R.fa, F, inf); if (v === null) return;
+        var b = perCassa[num];
+        if (!b || v < b.v) perCassa[num] = { num: num, code: x.code, v: v, cat: x.cat, nome: nomeCassa(num) };
+      });
+    });
+    return Object.keys(perCassa).map(function (k) { return perCassa[k]; })
+      .sort(function (a, b) { return a.v - b.v || chiaveOrd(a.nome).localeCompare(chiaveOrd(b.nome)); });
+  }
+  function aCarico(spesa, f, fa) { return Math.min(spesa, f) + Math.min(0.1 * Math.max(spesa - f, 0), ALIQ_MAX[fa] || 700); }
+  function analisiFranchigie(R, num, code, inf, liv) {
+    var spesa = SPESE[liv], am = ALIQ_MAX[R.fa] || 700;
+    var righe = R.frs.map(function (f) {
+      var v = premio(num, code, R.reg, R.fa, f, inf); if (v === null) return null;
+      var c = aCarico(spesa, f, R.fa);
+      return { f: f, v: v, premi: 12 * v, carico: c, tot: 12 * v + c, peggio: 12 * v + f + am };
+    }).filter(Boolean);
+    var ord = righe.slice().sort(function (a, b) { return a.tot - b.tot; });
+    var perF = {}; righe.forEach(function (r) { perF[r.f] = r; });
+    return { num: num, code: code, inf: inf, liv: liv, spesa: spesa, righe: righe, migliore: ord[0] || null, seconda: ord[1] || null, perF: perF };
+  }
+
+  function calcola() {
+    var R = {};
+    R.eta = eta(); R.fa = fascia(); R.luogo = luogo(); R.reg = regione();
+    R.frs = R.fa ? franchigie(R.fa) : [];
+    R.infTarget = S.lavoro === "si" ? "N" : "U";
+    R.lettera = S.lettera !== "" && S.lettera !== null && isFinite(Number(S.lettera)) && Number(S.lettera) > 0 ? Number(S.lettera) : null;
+    // Il premio della lettera completa le risposte solo dentro la cassa che hai indicato. Con la cassa
+    // «non lo so» un premio tondo può combaciare per caso con un altro prodotto: lì la pagina propone,
+    // e conta solo se la persona conferma («Sì, è la mia»).
+    R.matchTutti = corrispondenze(R.lettera, R.reg, R.fa);
+    R.match = isCassa(S.cassa) ? R.matchTutti : [];
+    var mNum = comune(R.match, "num"), mCode = comune(R.match, "code"), mFr = comune(R.match, "fr"), mInf = comune(R.match, "inf");
+    // cassa e prodotto di oggi
+    R.cassa = isCassa(S.cassa) ? S.cassa : (mNum || null);
+    R.cassaDedotta = !isCassa(S.cassa) && !!R.cassa;
+    var ps = prodScelto();
+    if (ps) R.prod = ps;
+    else if (R.cassa && mNum === R.cassa && mCode) { R.prod = mCode; R.prodDedotto = true; }
+    else R.prod = null;
+    // franchigia di oggi
+    if (typeof S.franchigia === "number" && R.frs.indexOf(S.franchigia) >= 0) R.F = S.franchigia;
+    else if (mFr !== undefined) { R.F = mFr; R.Fdedotta = true; }
+    else R.F = null;
+    // infortunio di oggi
+    if (S.infOggi === "si") R.infOggi = "U";
+    else if (S.infOggi === "no") R.infOggi = "N";
+    else if (mInf) { R.infOggi = mInf; R.infDedotto = true; }
+    else if (S.lavoro === "si") { R.infOggi = "N"; R.infIpotesi = true; }   // ipotesi prudente: risparmio più basso
+    else R.infOggi = "U";
+    R.catOggi = R.cassa && R.prod ? cat(D.assicuratori[R.cassa].prodotti[R.prod]) :
+      ({ libero: 1, medico: 1, hmo: 1, tel: 1 }[S.modello] ? S.modello : null);
+    // premio di oggi
+    R.premioDati = (R.cassa && R.prod && R.reg && R.fa && R.F !== null) ? premio(R.cassa, R.prod, R.reg, R.fa, R.F, R.infOggi) : null;
+    R.cur = R.lettera !== null ? R.lettera : R.premioDati;
+    R.fonte = R.lettera !== null ? "lettera" : R.premioDati !== null ? "dati" : null;
+    R.range = null;
+    if (R.cur === null && R.cassa && R.F !== null && R.reg && R.fa) {
+      var cand = filtraModello(prodotti(R.cassa), S.modello); if (!cand.length) cand = prodotti(R.cassa);
+      var vs = cand.map(function (x) { return premio(R.cassa, x.code, R.reg, R.fa, R.F, R.infOggi); }).filter(function (v) { return v !== null; });
+      if (vs.length) R.range = { min: Math.min.apply(null, vs), max: Math.max.apply(null, vs), n: vs.length };
+    }
+    // preferenze e spese
+    R.acc = accettati();
+    R.livStimato = livello();
+    R.liv = S.livello && SPESE[S.livello] ? S.livello : R.livStimato;
+    // franchigia del confronto: quella di oggi; se manca, quella che costa meno con le tue spese
+    R.Fcmp = R.F;
+    if (R.Fcmp === null && R.reg && R.fa) {
+      var meglio = null;
+      R.frs.forEach(function (f) {
+        var al = alternative(R, f, R.infTarget, R.acc); if (!al.length) return;
+        var tot = 12 * al[0].v + aCarico(SPESE[R.liv], f, R.fa);
+        if (!meglio || tot < meglio.tot) meglio = { f: f, tot: tot };
+      });
+      R.Fcmp = meglio ? meglio.f : null;
+    }
+    R.alts = R.Fcmp !== null ? alternative(R, R.Fcmp, R.infTarget, R.acc) : [];
+    var best = R.alts[0] || null; R.best = best;
+    // verdetto
+    if (!R.reg || !R.fa) R.verdetto = { tipo: "dipende", motivo: "dati" };
+    else if (!best) R.verdetto = { tipo: "dipende", motivo: "nessuna" };
+    else if (R.cur !== null && R.F !== null) {
+      var s = (R.cur - best.v) * 12;
+      R.verdetto = s >= SOGLIA ? { tipo: "cambia", s: s } : { tipo: "bene", s: s };
+    } else if (R.range && R.F !== null) {
+      var smin = (R.range.min - best.v) * 12, smax = (R.range.max - best.v) * 12;
+      if (smin >= SOGLIA) R.verdetto = { tipo: "cambia", s: smin, almeno: true };
+      else if (smax < SOGLIA) R.verdetto = { tipo: "bene", s: smax, almassimo: true };
+      else R.verdetto = { tipo: "dipende", motivo: "prodotto", soglia: best.v + SOGLIA / 12 };
+    } else if (R.F === null) R.verdetto = { tipo: "dipende", motivo: "franchigia", soglia: best.v + SOGLIA / 12 };
+    else R.verdetto = { tipo: "dipende", motivo: "premio", soglia: best.v + SOGLIA / 12 };
+    // franchigia giusta, sul prodotto che conta
+    R.ref = null;
+    if (best && R.verdetto.tipo === "cambia") R.ref = { num: best.num, code: best.code };
+    else if (R.cassa && R.prod) R.ref = { num: R.cassa, code: R.prod };
+    else if (best) R.ref = { num: best.num, code: best.code };
+    R.an = R.ref ? analisiFranchigie(R, R.ref.num, R.ref.code, R.infTarget, R.liv) : null;
+    // spunti
+    var tutto = { libero: true, medico: true, hmo: true, tel: true, farmacia: true };
+    var altri = R.Fcmp !== null ? alternative(R, R.Fcmp, R.infTarget, tutto) : [];
+    R.altroModello = null;
+    if (best && altri[0] && !compatibile(altri[0].cat, R.acc) && (best.v - altri[0].v) * 12 >= SOGLIA) {
+      R.altroModello = { alt: altri[0], s: (best.v - altri[0].v) * 12 };
+    }
+    R.infParte = null;     // quanto vale l'infortunio all'anno
+    var pU, pN;
+    if (R.cassa && R.prod && R.Fcmp !== null) { pU = premio(R.cassa, R.prod, R.reg, R.fa, R.Fcmp, "U"); pN = premio(R.cassa, R.prod, R.reg, R.fa, R.Fcmp, "N"); }
+    if ((pU == null || pN == null) && best) { pU = premio(best.num, best.code, R.reg, R.fa, R.Fcmp, "U"); pN = premio(best.num, best.code, R.reg, R.fa, R.Fcmp, "N"); }
+    if (pU != null && pN != null) R.infParte = (pU - pN) * 12;
+    return R;
+  }
+
+  // ── passi
+  var PASSI = [
+    { id: "benvenuto", r: pBenvenuto, c: cBenvenuto },
+    { id: "nascita", r: pNascita, c: cNascita, ok: okNascita, et: "Anno di nascita" },
+    { id: "npa", r: pNpa, c: cNpa, ok: okNpa, et: "Domicilio" },
+    { id: "lavoro", r: pLavoro, c: cLavoro, et: "Lavoro e infortunio" },
+    { id: "cassa", r: pCassa, c: cCassa, et: "Cassa di oggi" },
+    { id: "modello", r: pModello, c: cModello, et: "Modello di oggi" },
+    { id: "prodotto", r: pProdotto, c: cProdotto, et: "Prodotto", vis: function () { return isCassa(S.cassa) && !!S.modello && prodottiFiltrati().length !== 1; } },
+    { id: "franchigia", r: pFranchigia, c: cFranchigia, et: "Franchigia di oggi" },
+    { id: "lettera", r: pLettera, c: cLettera, et: "Premio della lettera" },
+    { id: "pref", r: pPref, c: cPref, et: "Cosa ti va bene" },
+    { id: "spese", r: pSpese, c: cSpese, et: "Spese sanitarie" },
+    { id: "compl", r: pCompl, c: cCompl, et: "Complementari" },
+    { id: "risultato", r: pRisultato, c: cRisultato }
+  ];
+  function trovaPasso(id) { for (var i = 0; i < PASSI.length; i++) if (PASSI[i].id === id) return PASSI[i]; return null; }
+  function visibili() { return PASSI.filter(function (p) { return !p.vis || p.vis(); }); }
+  function domande() { return visibili().filter(function (p) { return p.id !== "benvenuto" && p.id !== "risultato"; }); }
+  function posizione(v, id) {
+    for (var i = 0; i < v.length; i++) if (v[i].id === id) return i;
+    // passo non più visibile: il primo visibile che viene dopo
+    var k = PASSI.indexOf(trovaPasso(id));
+    for (var j = 0; j < v.length; j++) if (PASSI.indexOf(v[j]) > k) return j;
+    return 0;
+  }
+
+  function mostra(id, conFocus) {
+    clearTimeout(tAvanza);
+    nascondiTip();
+    var v = visibili(), p = v[posizione(v, id)];
+    S.passo = p.id; salvaSubito();
+    app.innerHTML = '<div class="passo-anim">' + p.r() + '</div>';
+    if (p.c) p.c();
+    var dom = domande(), qi = dom.indexOf(p);
+    var perc = p.id === "benvenuto" ? 0 : p.id === "risultato" ? 100 : Math.round((qi + 1) / (dom.length + 1) * 100);
+    $("avanz").style.width = perc + "%";
+    $("indietro").classList.toggle("invisibile", p.id === "benvenuto");
+    var av = $("avanti");
+    av.classList.toggle("invisibile", p.id === "risultato");
+    av.textContent = p.id === "benvenuto" ? "Cominciamo →" : qi === dom.length - 1 ? "Il risultato →" : "Avanti →";
+    $("passo").textContent = p.id === "benvenuto" ? "" : p.id === "risultato" ? "Risultato" : (qi + 1) + " di " + dom.length;
+    window.scrollTo(0, 0);
+    if (conFocus) app.focus({ preventScroll: true });
+  }
+  function avanti() {
+    clearTimeout(tAvanza);
+    var v = visibili(), i = posizione(v, S.passo), p = v[i];
+    if (p.id !== S.passo) { mostra(p.id, true); return; }
+    if (p.ok && !p.ok()) return;
+    if (i < v.length - 1) mostra(v[i + 1].id, true);
+  }
+  function indietro() {
+    clearTimeout(tAvanza);
+    var v = visibili(), i = posizione(v, S.passo);
+    if (v[i].id !== S.passo) { mostra(v[i].id, true); return; }
+    if (i > 0) mostra(v[i - 1].id, true);
+  }
+  var tAvanza = null;
+  function avanzaPresto() { clearTimeout(tAvanza); tAvanza = setTimeout(avanti, 280); }
+
+  function testa(icona, titolo, aiuto) {
+    return '<div class="q-ico">' + ico(icona, 28) + '</div><h2 class="q" id="qt">' + titolo + '</h2>' +
+      (aiuto ? '<p class="aiuto">' + aiuto + '</p>' : '');
+  }
+  function opz(valore, titolo, sotto, icona, premuto, cls) {
+    return '<button type="button" class="opz' + (cls ? " " + cls : "") + '" data-v="' + esc(valore) + '" aria-pressed="' + (premuto ? "true" : "false") + '">' +
+      (icona ? '<span class="oi">' + ico(icona, 22) + '</span>' : '') +
+      '<span class="ot"><b>' + titolo + '</b>' + (sotto ? '<small>' + sotto + '</small>' : '') + '</span>' +
+      '<span class="spunta">' + ico("check", 16) + '</span></button>';
+  }
+  function scelta(cont, fn) {          // una sola risposta: aggiorna solo i pulsanti, mai la pagina
+    cont.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("button.opz") : null;
+      if (!b || !cont.contains(b)) return;
+      cont.querySelectorAll("button.opz").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      fn(b.getAttribute("data-v"), b);
+    });
+  }
+  function errore(id, testo) {
+    var o = $(id); if (!o) return;
+    o.className = "esito-campo err"; o.innerHTML = ico("info", 18) + "<span>" + testo + "</span>";
+  }
+
+  // ── benvenuto
+  function pBenvenuto() {
+    return '<div class="hero-ico">' + ico("cuore", 32) + '</div>' +
+      '<h1>La tua cassa malati 2027: ti conviene cambiare?</h1>' +
+      '<p class="sotto">Una decina di domande brevi, circa 3-4 minuti.</p>' +
+      (ripreso ? '<div class="box"><b>Riprendi da dove eri rimasta.</b> Le risposte già date sono qui. ' +
+        '<button class="link" type="button" id="dacapo">Ricomincia da capo</button></div>' : '') +
+      '<p>Ciao, sono <b>Giorgio Carrara</b>, consulente patrimoniale SVAG. ' + INTRO_CHI + '</p>' +
+      '<p>Rispondi a qualche domanda: alla fine la pagina ti dice se per il 2027 ti conviene cambiare cassa, quanto risparmi e perché.</p>' +
+      '<div class="tiles">' +
+        '<div class="tile"><span class="t-ico">' + ico("orologio", 22) + '</span><span><b>3-4 minuti</b><span class="s">una domanda per volta</span></span></div>' +
+        '<div class="tile"><span class="t-ico">' + ico("scudo", 22) + '</span><span><b>Premi ufficiali 2027</b><span class="s">dell’UFSP (Ufficio federale della sanità pubblica) per il Ticino</span></span></div>' +
+        '<div class="tile"><span class="t-ico">' + ico("lucchetto", 22) + '</span><span><b>Resta sul tuo telefono</b><span class="s">finché non lo mandi tu</span></span></div>' +
+      '</div>' +
+      '<ul class="punti">' +
+        '<li>Tocca la risposta giusta. Se non la sai, c’è quasi sempre «Non lo so».</li>' +
+        '<li>Se ce l’hai, tieni a portata di mano la lettera della cassa con il premio 2027.</li>' +
+        '<li>Puoi andare avanti e indietro. Se chiudi la pagina, riprendi da qui su questo dispositivo.</li>' +
+        '<li>Alla fine, se vuoi, mandi il risultato a Giorgio con un tocco.</li>' +
+      '</ul>' +
+      '<div class="box privacy"><div class="tit">' + ico("lucchetto", 18) + ' I tuoi dati</div><ul>' +
+        '<li><b>Questa pagina non trasmette le tue risposte a nessun server.</b> Restano solo nel browser di questo dispositivo, così puoi interrompere e riprendere.</li>' +
+        '<li><b>I conti li fa la pagina sul tuo dispositivo</b>, con i premi ufficiali scaricati insieme alla pagina.</li>' +
+        '<li><b>Escono solo se le mandi tu</b>, per WhatsApp o per e-mail, a un unico destinatario: Giorgio Carrara, SVAG (' + WHATSAPP_LEGGIBILE + ', ' + DESTINATARIO + ').</li>' +
+        '<li><b>Servono a Giorgio per la consulenza SVAG.</b> Una volta ricevute, sono trattate secondo la legge federale sulla protezione dei dati (nLPD).</li>' +
+        '<li><b>Niente cookie né statistiche.</b> Come ogni sito, il servizio che ospita la pagina (GitHub Pages) registra per sicurezza l’indirizzo IP di chi la visita, ma non riceve le tue risposte.</li>' +
+        '<li><b>Le cancelli quando vuoi</b> da questo dispositivo, con il pulsante in fondo al risultato.</li>' +
+      '</ul></div>';
+  }
+  function cBenvenuto() {
+    var dc = $("dacapo");
+    if (dc) dc.addEventListener("click", function () {
+      if (!confirm("Cancellare le risposte date finora e ricominciare?")) return;
+      S = applicaPre(statoVuoto()); ripreso = false; salvaSubito(); mostra("benvenuto");
+    });
+  }
+
+  // ── anno di nascita
+  function pNascita() {
+    return testa("cal", "In che anno sei nata?", "Il premio dipende dalla fascia d’età. Per il 2027 conta solo l’anno di nascita.") +
+      '<input class="campo-grande" id="nascita" inputmode="numeric" autocomplete="bday-year" maxlength="4" placeholder="AAAA" value="' + esc(S.nascita) + '" aria-labelledby="qt">' +
+      '<p class="esito-campo" id="nascita-esito" aria-live="polite"></p>';
+  }
+  function cNascita() {
+    var i = $("nascita"), o = $("nascita-esito");
+    function scrivi() {
+      var e = eta();
+      if (S.nascita.length < 4) { o.className = "esito-campo"; o.innerHTML = ""; return; }
+      if (e === null) { errore("nascita-esito", "Controlla l’anno: scrivilo con 4 cifre, fra 1900 e " + ANNO + "."); return; }
+      o.className = "esito-campo ok";
+      o.innerHTML = ico("check", 18) + "<span>Nel 2027 compi " + e + " anni: " + NOMI_FASCIA[fascia()] + ".</span>";
+    }
+    i.addEventListener("input", function () {
+      var t = i.value.replace(/\D/g, "").slice(0, 4);
+      if (t !== i.value) i.value = t;
+      S.nascita = t; salva(); scrivi();
+    });
+    i.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); avanti(); } });
+    scrivi();
+  }
+  function okNascita() {
+    if (eta() !== null) return true;
+    errore("nascita-esito", "Scrivi l’anno di nascita con 4 cifre, per esempio 1996: serve per il premio giusto.");
+    $("nascita").focus();
+    return false;
+  }
+
+  // ── domicilio
+  function pNpa() {
+    return testa("pin", "Dove abiti?", "Scrivi il numero postale (NPA, numero postale d’avviamento) del tuo domicilio. In Ticino il premio cambia fra le due regioni di premio.") +
+      '<p class="chip-riga" id="npa-pre"' + (S.npaPre ? '' : ' hidden') + '><span class="chip">proposto da Giorgio</span> Controlla che sia giusto: se non lo è, correggilo.</p>' +
+      '<input class="campo-grande" id="npa" inputmode="numeric" autocomplete="postal-code" maxlength="4" placeholder="6900" value="' + esc(S.npa) + '" aria-labelledby="qt">' +
+      '<div class="esito-campo" id="npa-esito" aria-live="polite"></div>' +
+      '<div id="npa-comuni"></div>';
+  }
+  function cNpa() {
+    var i = $("npa");
+    i.addEventListener("input", function () {
+      var t = i.value.replace(/\D/g, "").slice(0, 4);
+      if (t !== i.value) i.value = t;
+      if (t !== S.npa) { S.bfs = null; if (S.npaPre) { S.npaPre = false; $("npa-pre").hidden = true; } }
+      S.npa = t; salva(); scriviNpa();
+    });
+    i.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); avanti(); } });
+    scriviNpa();
+  }
+  function scriviNpa() {
+    var o = $("npa-esito"), box = $("npa-comuni");
+    box.innerHTML = "";
+    if (S.npa.length < 4) { o.className = "esito-campo"; o.innerHTML = ""; return; }
+    var cs = comuniNpa();
+    if (!cs) { errore("npa-esito", "Non trovo questo NPA fra quelli del Ticino. La pagina vale solo per il Ticino: controlla il numero, o scrivi a Giorgio."); return; }
+    var regs = regioniDi(cs);
+    if (regs.length > 1) {
+      o.className = "esito-campo"; o.innerHTML = ico("info", 18) + "<span>Questo NPA è diviso fra più comuni, con premi diversi. In quale comune abiti?</span>";
+      box.innerHTML = '<div class="opzioni" id="g-comune" style="margin-top:12px">' + cs.map(function (c) {
+        return opz(String(c.bfs), esc(c.c), esc(c.l.join(", ")) + ", regione di premio " + c.r, null, S.bfs === c.bfs);
+      }).join("") + '</div>';
+      scelta($("g-comune"), function (v) { S.bfs = Number(v); salva(); scriviEsitoNpa(); });
+      scriviEsitoNpa();
+      return;
+    }
+    scriviEsitoNpa();
+  }
+  function scriviEsitoNpa() {
+    var o = $("npa-esito"), l = luogo();
+    if (!l) return;
+    o.className = "esito-campo ok";
+    o.innerHTML = ico("check", 18) + "<span>" + (l.multi ? "Comuni di <b>" + esc(l.c) + "</b>" :
+      "<b>" + esc(l.l && l.l.length ? l.l.join(", ") : l.c) + "</b>, Comune di " + esc(l.c)) + ": regione di premio " + l.r + ".</span>";
+  }
+  function okNpa() {
+    if (regione()) return true;
+    if (!comuniNpa()) errore("npa-esito", "Scrivi un NPA del Ticino con 4 cifre, per esempio 6900.");
+    else errore("npa-esito", "Scegli il tuo comune qui sotto: il premio dipende da quello.");
+    $("npa").focus();
+    return false;
+  }
+
+  // ── lavoro e infortunio
+  function pLavoro() {
+    return testa("lavoro", "Lavori almeno 8 ore a settimana per lo stesso datore di lavoro?",
+        "Se sì, gli infortuni li copre già l’assicurazione del datore di lavoro (LAINF, legge federale sull’assicurazione contro gli infortuni). Allora nella cassa malati puoi toglierli e pagare meno.") +
+      '<div class="opzioni" id="g-lavoro">' +
+        opz("si", "Sì", "almeno 8 ore a settimana con lo stesso datore", null, S.lavoro === "si") +
+        opz("no", "No", "meno ore, lavoro in proprio o non lavoro", null, S.lavoro === "no") +
+        opz("nonso", "Non lo so", null, null, S.lavoro === "nonso", "nonso") +
+      '</div>' +
+      '<div class="sotto-dom" id="sub-inf"' + (S.lavoro === "si" ? '' : ' hidden') + '>' +
+        '<p class="q2">Nella tua polizza di oggi c’è anche l’infortunio?</p>' +
+        '<p class="aiuto">Sulla polizza c’è scritto «con infortunio» o «senza infortunio».</p>' +
+        '<div class="opzioni" id="g-inf">' +
+          opz("si", "Sì, c’è", null, null, S.infOggi === "si") +
+          opz("no", "No, è già senza", null, null, S.infOggi === "no") +
+          opz("nonso", "Non lo so", null, null, S.infOggi === "nonso", "nonso") +
+        '</div>' +
+      '</div>';
+  }
+  function cLavoro() {
+    scelta($("g-lavoro"), function (v) {
+      S.lavoro = v;
+      var sub = $("sub-inf");
+      if (v === "si") {
+        sub.hidden = false; salva();
+        if (sub.scrollIntoView) sub.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } else {
+        sub.hidden = true; S.infOggi = null;
+        $("g-inf").querySelectorAll("button.opz").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+        salva(); avanzaPresto();
+      }
+    });
+    scelta($("g-inf"), function (v) { S.infOggi = v; salva(); avanzaPresto(); });
+  }
+
+  // ── cassa di oggi
+  function pCassa() {
+    return testa("scudo", "Con quale cassa malati sei oggi?",
+        "Quella dell’assicurazione di base, la LAMal (legge federale sull’assicurazione malattie). Il nome è sulla tessera o sulla polizza.") +
+      '<div class="opzioni griglia tre" id="g-cassa">' +
+        CASSE.map(function (c) {
+          return opz(c.num, esc(c.nome), c.gruppo && c.gruppo !== c.nome ? "gruppo " + esc(c.gruppo) : null, null, S.cassa === c.num, "compatta");
+        }).join("") +
+        opz("nonso", "Non lo so, o la mia non è in elenco", null, null, S.cassa === "nonso", "nonso largo") +
+      '</div>';
+  }
+  function cCassa() {
+    scelta($("g-cassa"), function (v) {
+      if (v !== S.cassa) S.prodotto = null;
+      S.cassa = v; salva(); avanzaPresto();
+    });
+  }
+
+  // ── modello di oggi
+  function pModello() {
+    return testa("steto", "Che modello hai oggi?",
+        "È scritto sulla polizza, accanto al nome del prodotto. Dice da chi vai per primo quando stai male. HMO sta per Health Maintenance Organization: uno studio medico di gruppo.") +
+      '<div class="opzioni" id="g-mod">' +
+        opz("libero", "Scelgo io il medico", "modello standard: vai da chi vuoi", "bussola", S.modello === "libero") +
+        opz("medico", "Medico di famiglia", "vai prima dal tuo medico di famiglia", "medico", S.modello === "medico") +
+        opz("hmo", "Rete HMO", "vai prima in uno studio medico di gruppo", "gruppo", S.modello === "hmo") +
+        opz("tel", "Telmed: telefono o app prima", "prima chiami una centrale medica o usi l’app (telemedicina)", "telefono", S.modello === "tel") +
+        opz("altro", "Altro", "la farmacia come primo passo, o un modello flessibile", "altro", S.modello === "altro") +
+        opz("nonso", "Non lo so", null, null, S.modello === "nonso", "nonso") +
+      '</div>';
+  }
+  function cModello() {
+    scelta($("g-mod"), function (v) {
+      if (v !== S.modello) S.prodotto = null;
+      S.modello = v; salva(); avanzaPresto();
+    });
+  }
+
+  // ── prodotto esatto
+  function pProdotto() {
+    var num = S.cassa, a = D.assicuratori[num], tutti = prodotti(num), filt = prodottiFiltrati();
+    var vuotoFilt = !filt.length, princ = vuotoFilt ? tutti : filt;
+    var altri = vuotoFilt ? [] : tutti.filter(function (x) { return filt.indexOf(x) < 0 && !filt.some(function (y) { return y.code === x.code; }); });
+    var tipo = S.modello && S.modello !== "nonso" && !vuotoFilt;
+    function riga(x) { return opz(x.code, esc(x.p.n), esc(NOMI_CAT[x.cat]), ICO_CAT[x.cat], S.prodotto === x.code); }
+    return testa("doc", "Quale di questi è il tuo prodotto?",
+        (vuotoFilt && S.modello && S.modello !== "nonso" ? "Non trovo prodotti di questo tipo per " + esc(a.nome) + ": ecco tutti i suoi prodotti 2027. " :
+          "Sono i prodotti " + (tipo ? "di questo tipo " : "") + "di " + esc(a.nome) + " per il 2027. ") +
+        "Il nome è sulla polizza o sulla lettera dei premi.") +
+      '<div class="opzioni" id="g-prod">' +
+        princ.map(riga).join("") +
+        (altri.length ? '<div class="opzioni" id="altri-prod" hidden>' + altri.map(riga).join("") + '</div>' +
+          '<button class="link" type="button" id="mostra-altri">Mostra anche gli altri ' + altri.length + ' prodotti di ' + esc(a.nome) + '</button>' : '') +
+        opz("nonso", "Non lo riconosco", "la pagina userà il premio della lettera, se ce l’hai", null, S.prodotto === "nonso", "nonso") +
+      '</div>';
+  }
+  function cProdotto() {
+    scelta($("g-prod"), function (v) { S.prodotto = v; salva(); avanzaPresto(); });
+    var m = $("mostra-altri");
+    if (m) {
+      var altri = $("altri-prod");
+      if (S.prodotto && altri.querySelector('button.opz[aria-pressed="true"]')) { altri.hidden = false; m.hidden = true; }
+      m.addEventListener("click", function () { altri.hidden = false; m.hidden = true; });
+    }
+  }
+
+  // ── franchigia
+  function franchigieOfferte() {
+    var fa = fascia() || "E", frs = franchigie(fa), reg = regione(), ps = prodScelto();
+    if (!ps || !reg) return frs;
+    var ok = frs.filter(function (f) { return premio(S.cassa, ps, reg, fa, f, "N") !== null || premio(S.cassa, ps, reg, fa, f, "U") !== null; });
+    return ok.length ? ok : frs;
+  }
+  function pFranchigia() {
+    var lista = franchigieOfferte();
+    return testa("monete", "Che franchigia hai oggi?",
+        "È la parte delle spese mediche che paghi tu ogni anno, prima che la cassa cominci a pagare. La trovi sulla polizza o sulla lettera dei premi.") +
+      '<div class="opzioni griglia" id="g-fr">' +
+        lista.map(function (f) { return opz(String(f), "CHF " + fmt(f), null, null, S.franchigia === f, "compatta"); }).join("") +
+        opz("nonso", "Non lo so", null, null, S.franchigia === "nonso", "nonso largo") +
+      '</div>';
+  }
+  function cFranchigia() {
+    scelta($("g-fr"), function (v) { S.franchigia = v === "nonso" ? "nonso" : Number(v); salva(); avanzaPresto(); });
+  }
+
+  // ── premio della lettera
+  function pLettera() {
+    return testa("busta", "Quanto pagherai al mese nel 2027?",
+        "Lo trovi nella lettera che la cassa ti ha mandato in autunno: è il premio al mese 2027 della sola assicurazione di base, prima di eventuali sussidi (RIPAM, riduzione individuale dei premi). È facoltativo: se lo scrivi, la pagina usa il tuo.") +
+      '<div class="riga-campo"><div class="num-w"><span class="cur">CHF</span>' +
+        '<input class="campo-grande" id="lettera" inputmode="decimal" autocomplete="off" placeholder="0.00" value="' +
+        (S.lettera ? fmt(Number(S.lettera), true) : '') + '" aria-labelledby="qt"></div><span class="unita-t">al mese</span></div>' +
+      '<div class="esito-campo" id="lettera-esito" aria-live="polite"></div>' +
+      '<div class="box neutro" id="lettera-dati" hidden></div>' +
+      '<div class="azioni"><button class="secondario" type="button" id="salta-lettera">Non ce l’ho sotto mano</button></div>';
+  }
+  function cLettera() {
+    var i = $("lettera");
+    i.addEventListener("input", function () {
+      var n = norm(i.value);
+      if (n === null) { errore("lettera-esito", "Non riesco a leggere questa cifra: scrivila così, 485.30."); return; }
+      S.lettera = n === "" || Number(n) === 0 ? "" : n;
+      salva(); scriviLettera();
+    });
+    i.addEventListener("blur", function () { var n = norm(i.value); if (n) i.value = fmt(Number(n), true); });
+    i.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); i.blur(); avanti(); } });
+    $("salta-lettera").addEventListener("click", function () { S.lettera = ""; i.value = ""; salva(); avanti(); });
+    scriviLettera();
+  }
+  function descrizione(num, code, f, inf) {
+    return esc(nomeCassa(num)) + ", " + esc(nomeProd(num, code, true)) + ", franchigia CHF " + fmt(f) + ", " + (inf === "U" ? "con infortunio" : "senza infortunio");
+  }
+  function scriviLettera() {
+    var R = calcola(), o = $("lettera-esito"), box = $("lettera-dati");
+    o.className = "esito-campo"; o.innerHTML = ""; box.hidden = true; box.innerHTML = "";
+    if (R.lettera === null) {
+      var t = "";
+      if (R.premioDati !== null) t = "Secondo i premi UFSP 2027 il tuo premio è <b>" + chf(R.premioDati, true) + "</b> al mese (" + descrizione(R.cassa, R.prod, R.F, R.infOggi) + "). Se la lettera dice lo stesso, puoi andare avanti.";
+      else if (R.range) t = "Secondo i premi UFSP 2027, i prodotti di " + esc(nomeCassa(R.cassa)) + " che potresti avere costano fra <b>" + chf(R.range.min, true) + "</b> e <b>" + chf(R.range.max, true) + "</b> al mese. Con il premio della lettera la pagina capisce qual è il tuo.";
+      else t = "Senza cassa, prodotto e franchigia la pagina non può calcolare il tuo premio di oggi. Con quello della lettera sì.";
+      box.innerHTML = t; box.hidden = false;
+      return;
+    }
+    if (R.lettera > 1500) { errore("lettera-esito", "Sembra un importo all’anno, o con le complementari dentro: scrivi il premio al mese della sola base."); return; }
+    if (R.match.length) {
+      var m = R.match.length === 1 ? R.match[0] : null;
+      o.className = "esito-campo ok";
+      o.innerHTML = ico("check", 18) + "<span>Combacia con i premi UFSP 2027" +
+        (m ? ": " + descrizione(m.num, m.code, m.fr, m.inf) + "." :
+          (R.F !== null && R.Fdedotta ? ", con la franchigia CHF " + fmt(R.F) + "." : ".") + " Hanno questo premio " + R.match.length + " prodotti.") + "</span>";
+      return;
+    }
+    if (!isCassa(S.cassa) && R.matchTutti.length) {
+      var mt = R.matchTutti, num1 = comune(mt, "num");
+      if (num1 === undefined) {
+        box.innerHTML = "Questo premio ce l’hanno " + mt.length + " prodotti di casse diverse. Per capire qual è il tuo, torna alla domanda sulla cassa e sceglila.";
+        box.hidden = false;
+        return;
+      }
+      var code1 = comune(mt, "code"), fr1 = comune(mt, "fr"), inf1 = comune(mt, "inf");
+      box.innerHTML = "Combacia con i premi UFSP 2027 di <b>" + esc(nomeCassa(num1)) + "</b>" +
+        (code1 ? ", " + esc(nomeProd(num1, code1, true)) : "") + (fr1 !== undefined ? ", franchigia CHF " + fmt(fr1) : "") +
+        (inf1 ? ", " + infTesto(inf1) : "") + ". È la tua cassa?" +
+        '<div class="azioni" style="margin:12px 0 0"><button class="secondario" type="button" id="conferma-cassa">Sì, è la mia</button></div>';
+      box.hidden = false;
+      $("conferma-cassa").addEventListener("click", function () {
+        S.cassa = num1; S.prodotto = code1 || null;
+        if (code1) { var c1 = cat(D.assicuratori[num1].prodotti[code1]); S.modello = c1 === "flex" || c1 === "farmacia" ? "altro" : c1; }
+        if (fr1 !== undefined && typeof S.franchigia !== "number") S.franchigia = fr1;
+        if (inf1 && S.lavoro === "si" && S.infOggi !== "si" && S.infOggi !== "no") S.infOggi = inf1 === "U" ? "si" : "no";
+        salva(); scriviLettera();
+      });
+      return;
+    }
+    if (R.premioDati !== null) {
+      box.innerHTML = "È diverso dai premi UFSP 2027 per le tue risposte (" + chf(R.premioDati, true) + " al mese). Controlla che sia il premio al mese della sola base, senza sussidi né complementari. Se è giusto così, la pagina usa il tuo.";
+      box.hidden = false;
+      return;
+    }
+    o.className = "esito-campo ok";
+    o.innerHTML = ico("check", 18) + "<span>La pagina userà questo premio.</span>";
+  }
+
+  // ── cosa ti va bene
+  function pPref() {
+    function has(k) { return S.pref.indexOf(k) >= 0; }
+    return testa("cuore", "Nel 2027, cosa ti va bene?",
+        "Scegli tutto quello che accetti: la pagina ti propone solo modelli adatti. Più cose accetti, più puoi risparmiare. In caso di urgenza vai sempre dove serve, con qualsiasi modello.") +
+      '<div class="opzioni" id="g-pref">' +
+        opz("libero", "Andare da qualsiasi medico", "senza passare prima da nessuno (modello standard)", "bussola", has("libero"), "multi") +
+        opz("medico", "Il medico di famiglia come primo passo", "il tuo medico deve essere nella lista della cassa", "medico", has("medico"), "multi") +
+        opz("hmo", "Uno studio medico di gruppo come primo passo", "rete HMO", "gruppo", has("hmo"), "multi") +
+        opz("tel", "Una telefonata o un’app prima del medico", "Telmed, telemedicina", "telefono", has("tel"), "multi") +
+        opz("farmacia", "La farmacia come primo passo", "una farmacia della lista della cassa", "farmacia", has("farmacia"), "multi") +
+      '</div>' +
+      '<p class="nota" id="pref-nota" style="margin-top:14px"></p>';
+  }
+  function cPref() {
+    var g = $("g-pref");
+    g.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("button.opz") : null; if (!b) return;
+      var k = b.getAttribute("data-v"), i = S.pref.indexOf(k);
+      if (i >= 0) S.pref.splice(i, 1); else S.pref.push(k);
+      b.setAttribute("aria-pressed", String(i < 0));
+      salva(); notaPref();
+    });
+    notaPref();
+  }
+  function notaPref() {
+    var n = $("pref-nota");
+    n.textContent = S.pref.length ? "" : "Se non scegli niente, la pagina tiene il tipo di modello che hai oggi.";
+  }
+
+  // ── spese
+  function pills(k, valori) {
+    return '<div class="pills" data-k="' + k + '" role="group">' + valori.map(function (v) {
+      return '<button type="button" class="pill" data-v="' + v[0] + '" aria-pressed="' + (S[k] === v[0]) + '">' + v[1] + '</button>';
+    }).join("") + '</div>';
+  }
+  function pSpese() {
+    return testa("pulse", "Quanto usi la sanità in un anno?", "Bastano risposte all’ingrosso: servono a stimare le spese e la franchigia giusta per te.") +
+      '<div class="dom2"><div class="lbl2">Quante volte vai dal medico in un anno?</div><div class="aiuto2">visite, controlli, analisi</div>' +
+        pills("visite", [["0-1", "0 o 1"], ["2-5", "Da 2 a 5"], ["6+", "Più di 5"], ["nonso", "Non lo so"]]) + '</div>' +
+      '<div class="dom2"><div class="lbl2">Prendi farmaci in modo regolare?</div><div class="aiuto2">per esempio ogni mese</div>' +
+        pills("farmaci", [["si", "Sì"], ["no", "No"]]) + '</div>' +
+      '<div class="dom2"><div class="lbl2">Hai cure in corso o previste nel 2027?</div><div class="aiuto2">una terapia, la fisioterapia, un’operazione, lo specialista</div>' +
+        pills("cure", [["si", "Sì"], ["no", "No"]]) + '</div>' +
+      '<div class="box" id="spese-stima" aria-live="polite"></div>' +
+      '<p class="nota">Aspetti un bambino? Dillo a Giorgio: dalla 13a settimana di gravidanza le cure non pagano né franchigia né aliquota.</p>';
+  }
+  function cSpese() {
+    app.querySelectorAll(".pills").forEach(function (g) {
+      g.addEventListener("click", function (e) {
+        var b = e.target.closest ? e.target.closest("button.pill") : null; if (!b) return;
+        var k = g.getAttribute("data-k");
+        S[k] = b.getAttribute("data-v"); S.livello = null;
+        g.querySelectorAll("button.pill").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        salva(); scriviStima();
+      });
+    });
+    scriviStima();
+  }
+  function scriviStima() {
+    var l = livello(), nessuna = !S.visite && !S.farmaci && !S.cure;
+    $("spese-stima").innerHTML = (nessuna ? "Senza risposte la pagina parte da <b>spese medie</b>" : "Stima: <b>" + LIVELLI[l] + "</b>") +
+      ", cioè fatture mediche per circa " + chf(SPESE[l]) + " all’anno. Nel risultato puoi provare anche gli altri livelli.";
+  }
+
+  // ── complementari
+  function pCompl() {
+    function has(k) { return S.compl.indexOf(k) >= 0; }
+    return testa("piu", "Hai anche assicurazioni complementari?",
+        "Sono le coperture in più della cassa, fuori dalla base. Si chiamano LCA, dalla legge federale sul contratto d’assicurazione. Scegli tutte quelle che hai.") +
+      '<div class="opzioni" id="g-compl">' +
+        opz("dentista", "Dentista", null, "dente", has("dentista"), "multi") +
+        opz("ospedale", "Ospedale", "camera semiprivata o privata", "ospedale", has("ospedale"), "multi") +
+        opz("altro", "Altro", "occhiali, medicina alternativa, palestra, viaggi", "piu", has("altro"), "multi") +
+        opz("nessuna", "Nessuna", "ho solo l’assicurazione di base", "nessuna", has("nessuna"), "multi") +
+        opz("nonso", "Non lo so", null, null, has("nonso"), "multi nonso") +
+      '</div>';
+  }
+  function cCompl() {
+    var g = $("g-compl");
+    g.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("button.opz") : null; if (!b) return;
+      var k = b.getAttribute("data-v"), c = S.compl.slice(), i = c.indexOf(k);
+      if (k === "nessuna" || k === "nonso") c = i >= 0 ? [] : [k];
+      else {
+        c = c.filter(function (x) { return x !== "nessuna" && x !== "nonso"; });
+        var j = c.indexOf(k); if (j >= 0) c.splice(j, 1); else c.push(k);
+      }
+      S.compl = c;
+      g.querySelectorAll("button.opz").forEach(function (x) { x.setAttribute("aria-pressed", String(c.indexOf(x.getAttribute("data-v")) >= 0)); });
+      salva();
+    });
+  }
+
+  // ── risultato
+  var R_ULTIMO = null;
+  function infTesto(inf) { return inf === "U" ? "con infortunio" : "senza infortunio"; }
+  function risparmioTesto(s) {
+    if (s >= 0.5) return '<span class="a-risp">risparmi ' + chf(s) + ' all’anno</span>';
+    if (s <= -0.5) return '<span class="a-risp piu">costa ' + chf(-s) + ' in più all’anno</span>';
+    return '<span class="a-risp piu">costa uguale</span>';
+  }
+  function verdettoFrase(R) {
+    var v = R.verdetto;
+    if (v.tipo === "cambia") return "mi conviene cambiare, risparmio " + (v.almeno ? "almeno " : "circa ") + chf(v.s) + " all'anno";
+    if (v.tipo === "bene") return "sono già messa bene, cambiare non vale la pena";
+    return "dipende " + ({ prodotto: "dal prodotto esatto che ho", premio: "da quanto pago oggi", franchigia: "dalla mia franchigia", nessuna: "dalle mie preferenze", dati: "da dati che mancano" }[v.motivo] || "");
+  }
+  function pRisultato() {
+    var R = calcola(); R_ULTIMO = R;
+    if (!R.reg || !R.fa) {
+      return '<h1>Il tuo risultato</h1><div class="box oro">Per i conti mancano ' + (!R.fa ? "l’anno di nascita" : "") + (!R.fa && !R.reg ? " e " : "") + (!R.reg ? "il tuo NPA" : "") + '.</div>' +
+        '<div class="azioni">' + (!R.fa ? '<button class="secondario" type="button" data-vai="nascita">Scrivi l’anno di nascita</button>' : '') +
+        (!R.reg ? '<button class="secondario" type="button" data-vai="npa">Scrivi il NPA</button>' : '') + '</div>';
+    }
+    var v = R.verdetto, best = R.best, h = "";
+    // verdetto
+    if (v.tipo === "cambia") {
+      h += '<div class="verdetto"><div class="v-testa">' + ico("giu", 22) + ' Il risultato</div>' +
+        '<div class="v-tit">Ti conviene cambiare:</div>' +
+        '<div class="v-pre">risparmi ' + (v.almeno ? "almeno" : "circa") + '</div>' +
+        '<div class="v-cifra">' + chf(v.s) + ' <small>all’anno</small></div>' +
+        '<p class="v-sotto">con ' + esc(best.nome) + ', ' + esc(nomeProd(best.num, best.code, true)) + ', stessa franchigia di CHF ' + fmt(R.Fcmp) + '.</p>';
+    } else if (v.tipo === "bene") {
+      h += '<div class="verdetto bene"><div class="v-testa">' + ico("okcerchio", 22) + ' Il risultato</div>' +
+        '<div class="v-tit">Sei già messa bene</div>' +
+        '<p class="v-sotto">Per il 2027 cambiare cassa non vale la pena.</p>';
+    } else {
+      var motivi = { prodotto: "Dipende dal prodotto esatto che hai", premio: "Dipende da quanto paghi oggi", franchigia: "Dipende dalla tua franchigia di oggi", nessuna: "Dipende da cosa ti va bene", dati: "Dipende da dati che mancano" };
+      h += '<div class="verdetto dipende"><div class="v-testa">' + ico("domanda", 22) + ' Il risultato</div>' +
+        '<div class="v-tit">' + motivi[v.motivo] + '</div>' +
+        (v.soglia && v.motivo !== "franchigia" ? '<p class="v-sotto">Ti conviene cambiare se la tua lettera dice più di <b>' + chf(v.soglia, true) + '</b> al mese.</p>' : '');
+    }
+    h += '<ul class="perche">' + perche(R).map(function (t) { return '<li>' + ico("check", 18) + '<span>' + t + '</span></li>'; }).join("") + '</ul></div>';
+    h += '<p class="nota">Stima sui premi ufficiali 2027 dell’UFSP per il Ticino. La decisione si conferma con Giorgio.</p>';
+
+    // il tuo premio
+    h += '<div class="sez"><h3><span class="h-ico">' + ico("doc", 22) + '</span>Il tuo premio 2027</h3><div class="card"><table><tbody>' +
+      '<tr><td class="k">Dove</td><td>' + esc(dove(R.luogo)) + ', regione di premio ' + R.reg + '</td></tr>' +
+      '<tr><td class="k">Fascia d’età</td><td>' + NOMI_FASCIA[R.fa].replace("fascia ", "") + '</td></tr>' +
+      '<tr><td class="k">Cassa</td><td>' + (R.cassa ? esc(nomeCassa(R.cassa)) + (R.cassaDedotta ? ' <span class="tag">dal premio della lettera</span>' : '') : 'non indicata') + '</td></tr>' +
+      '<tr><td class="k">Prodotto</td><td>' + (R.prod ? esc(nomeProd(R.cassa, R.prod)) + (R.prodDedotto ? ' <span class="tag">dal premio della lettera</span>' : '') :
+        R.range ? 'uno fra ' + R.range.n + ' prodotti' : 'non indicato') + '</td></tr>' +
+      '<tr><td class="k">Franchigia</td><td>' + (R.F !== null ? 'CHF ' + fmt(R.F) + (R.Fdedotta ? ' <span class="tag">dal premio della lettera</span>' : '') : 'non indicata') + '</td></tr>' +
+      '<tr><td class="k">Infortunio</td><td>' + (R.infOggi === "U" ? "compreso" : "escluso") + (R.infIpotesi ? ' <span class="tag">ipotesi</span>' : R.infDedotto ? ' <span class="tag">dal premio della lettera</span>' : '') + '</td></tr>' +
+      (R.cur !== null ?
+        '<tr class="forte"><td>Al mese</td><td class="n">' + chf(R.cur, true) + '</td></tr>' +
+        '<tr><td class="k">All’anno</td><td class="n">' + chf(R.cur * 12) + '</td></tr>' +
+        '<tr><td class="k">Da dove viene</td><td>' + (R.fonte === "lettera" ? "dalla tua lettera" + (R.match.length ? ", e combacia con i premi UFSP" : "") : "premi UFSP 2027") + '</td></tr>'
+      : R.range ?
+        '<tr class="forte"><td>Al mese</td><td class="n">' + chf(R.range.min, true) + ' a ' + chf(R.range.max, true) + '</td></tr>'
+      : '<tr class="forte"><td>Al mese</td><td class="n">da scrivere</td></tr>') +
+      '</tbody></table>' +
+      (R.cur === null ? '<p class="nota" style="margin:8px 0 0">Con il premio della lettera il risultato diventa preciso. <button class="link" type="button" data-vai="lettera">Aggiungilo</button></p>' : '') +
+      '</div></div>';
+
+    // alternative
+    if (R.alts.length) {
+      var cmpCur = R.cur !== null && R.F !== null;
+      h += '<div class="sez"><h3><span class="h-ico">' + ico("scudo", 22) + '</span>' + (v.tipo === "bene" ? "Le alternative più vicine" : "Le 3 alternative migliori per te") + '</h3>' +
+        '<p class="sotto">Franchigia CHF ' + fmt(R.Fcmp) + (R.F === null ? ' (quella che conviene con le tue spese)' : ', la stessa di oggi') + ', ' + infTesto(R.infTarget) +
+        (R.infTarget === "N" ? ' (gli infortuni li copre il datore di lavoro)' : '') + ', solo modelli che ti vanno bene.</p>';
+      R.alts.slice(0, 3).forEach(function (a, i) {
+        h += '<div class="card alt"><div class="rk">' + (i + 1) + '</div>' +
+          '<div class="a-nome">' + esc(a.nome) + (a.num === R.cassa ? ' <span class="tag">la tua cassa</span>' : '') + '</div>' +
+          '<div class="a-prod">' + esc(nomeProd(a.num, a.code, true)) + (a.cat !== "libero" ? ', ' + MOD_MINUSC[a.cat] : '') + '</div>' +
+          '<div class="a-cifre"><span class="a-mese">' + chf(a.v, true) + ' al mese</span>' +
+          (cmpCur ? risparmioTesto((R.cur - a.v) * 12) : '<span class="nota">' + chf(a.v * 12) + ' all’anno</span>') + '</div></div>';
+      });
+      if (R.alts.slice(0, 3).some(function (a) { return a.cat === "medico" || a.cat === "flex"; })) {
+        h += '<p class="nota">Con il medico di famiglia, il tuo medico deve essere nella lista della cassa: Giorgio lo controlla con te prima di firmare.</p>';
+      }
+      if (R.alts.length > 3) {
+        h += '<details><summary>Vedi le ' + Math.min(10, R.alts.length) + ' più convenienti per te</summary><div class="card"><table><thead><tr><th>Cassa e prodotto</th><th class="n">Al mese</th></tr></thead><tbody>' +
+          R.alts.slice(0, 10).map(function (a) { return '<tr><td>' + esc(a.nome) + '<br><span class="nota">' + esc(nomeProd(a.num, a.code, true)) + '</span></td><td class="n">' + chf(a.v, true) + '</td></tr>'; }).join("") +
+          '</tbody></table></div></details>';
+      }
+      h += '</div>';
+    }
+
+    // franchigia
+    if (R.an && R.an.righe.length) {
+      h += '<div class="sez" id="sez-fr">' + sezFranchigia(R) + '</div>';
+    }
+
+    // cosa non cambia
+    h += '<div class="sez"><h3><span class="h-ico">' + ico("scudo", 22) + '</span>Cosa non cambia</h3><div class="box"><ul>' +
+      '<li><b>Le cure pagate.</b> Per l’assicurazione di base sono le stesse in tutte le casse: le fissa la legge.</li>' +
+      '<li><b>Franchigia e aliquota.</b> Funzionano uguali dappertutto: oltre la franchigia paghi il 10&nbsp;% delle spese, al massimo ' + chf(ALIQ_MAX[R.fa]) + ' all’anno.</li>' +
+      '<li><b>Le complementari.</b> Restano dove sono, se non le sposti tu.</li>' +
+      '<li><b>La copertura.</b> Se cambi, sei assicurata con la nuova cassa da ' + DATE.inizio + ', senza giorni scoperti.</li>' +
+      '</ul></div>';
+    if (best && v.tipo !== "bene" && best.cat !== "libero") {
+      h += '<p class="nota">Cosa cambia con il modello ' + MOD_FRASE[best.cat] + ': ' + PRIMO_PASSO[best.cat] +
+        '. Se salti il primo passo, la cassa può non pagare. Le condizioni precise sono quelle della cassa.</p>';
+    }
+    h += '</div>';
+
+    // passi e date
+    h += '<div class="sez">' + sezPassi(R) + '</div>';
+
+    // complementari
+    var cn = notaComplementari(R);
+    if (cn) h += '<div class="sez"><h3><span class="h-ico">' + ico("piu", 22) + '</span>Le complementari</h3><div class="box neutro">' + cn + '</div></div>';
+
+    // avvertenza
+    h += '<div class="box oro" style="margin-top:28px"><div class="tit">' + ico("info", 18) + ' Da sapere</div>' +
+      '<p style="margin-top:6px">È una stima sui premi ufficiali 2027 approvati dall’UFSP per il Ticino (dati elaborati il ' + esc(D.generato) + '). ' +
+      'Le spese sanitarie sono un’ipotesi fatta con le tue risposte. Prima di firmare o di disdire, la decisione si conferma con Giorgio.</p></div>';
+
+    // le risposte
+    h += '<div class="sez"><details><summary>Rivedi le tue risposte</summary><div class="card"><table class="risposte"><tbody>' + righeRisposte(R) + '</tbody></table></div></details></div>';
+
+    // invio
+    h += '<div class="sez invio"><h3><span class="h-ico">' + ico("chat", 22) + '</span>Manda il risultato a Giorgio</h3>' +
+      '<div class="box privacy"><div class="tit">' + ico("lucchetto", 18) + ' Prima di inviare</div><ul>' +
+        '<li>Ogni pulsante apre WhatsApp o la tua posta con il messaggio per Giorgio già scritto: lo vedi e decidi tu se mandarlo.</li>' +
+        '<li>Sotto la prima riga c’è un testo <b>pieno di parentesi e virgolette</b>: è giusto così, serve al programma di Giorgio. Va mandato com’è.</li>' +
+        '<li>Destinatario unico: Giorgio Carrara. Finché non invii, le risposte restano su questo dispositivo.</li>' +
+        '<li>Se il dispositivo non è solo tuo, dopo l’invio cancellale con il pulsante qui sotto.</li>' +
+      '</ul></div>' +
+      '<label class="campo" for="nome">Il tuo nome (facoltativo)</label>' +
+      '<input class="testo" id="nome" autocomplete="name" maxlength="80" placeholder="Nome" value="' + esc(S.nome) + '">' +
+      '<div class="azioni">' +
+        '<button class="primario" type="button" id="whatsapp">' + ico("chat", 20) + ' Manda a Giorgio su WhatsApp</button>' +
+        '<button class="secondario" type="button" id="copia">' + ico("copia", 20) + ' Copia il messaggio</button>' +
+        '<button class="secondario" type="button" id="email">' + ico("busta", 20) + ' Manda per e-mail</button>' +
+      '</div>' +
+      '<p class="esito" id="esito" aria-live="polite"></p>' +
+      '<p class="nota">Se nessun pulsante apre l’app, tocca «Copia il messaggio» e incollalo in un messaggio a Giorgio, su WhatsApp (' + WHATSAPP_LEGGIBILE + ') o per e-mail (' + DESTINATARIO + ').</p>' +
+      '<details><summary>Vedi i dati che invii</summary><pre id="json"></pre></details>' +
+      '<p><button class="link" type="button" id="cancella">Cancella le mie risposte da questo dispositivo</button></p></div>';
+    return '<h1 style="margin-top:22px">Il tuo risultato</h1>' + h;
+  }
+
+  function perche(R) {
+    var v = R.verdetto, best = R.best, out = [], extra = [];
+    var nomeBest = best ? esc(best.nome) + " (" + esc(nomeProd(best.num, best.code, true)) + ")" : "";
+    // spunti che valgono in tutti i casi
+    var an = R.an, frTip = null;
+    if (an && an.migliore && R.F !== null && an.perF[R.F] && an.migliore.f !== R.F) {
+      var d = Math.round(an.perF[R.F].tot) - Math.round(an.migliore.tot);
+      if (d >= SOGLIA) frTip = "Con " + LIVELLI[an.liv] + " conviene la franchigia CHF " + fmt(an.migliore.f) + ": circa " + chf(d) + " in meno all’anno, premi e spese insieme. Lo vedi più sotto.";
+    }
+    var infTip = null;
+    if (R.infParte && R.infParte >= 1) {
+      if (R.infOggi === "U" && R.infTarget === "N") infTip = "Circa " + chf(R.infParte) + " all’anno vengono dal togliere l’infortunio, che ti copre già il datore di lavoro. Lo puoi fare anche restando nella tua cassa.";
+      else if (R.infIpotesi) infTip = "Ho calcolato il tuo premio senza infortunio. Se sulla polizza c’è, toglierlo vale altri " + chf(R.infParte) + " all’anno circa.";
+      else if (S.lavoro === "nonso") infTip = "Se lavori almeno 8 ore a settimana per lo stesso datore, puoi togliere l’infortunio: circa " + chf(R.infParte) + " in meno all’anno.";
+    }
+    var modTip = R.altroModello ? "Se ti andasse bene anche il modello " + MOD_FRASE[R.altroModello.alt.cat] +
+      ", con " + esc(R.altroModello.alt.nome) + " pagheresti " + chf(R.altroModello.alt.v, true) + " al mese: circa " + chf(R.altroModello.s) + " in meno all’anno." : null;
+    var medTip = best && (best.cat === "medico" || best.cat === "flex") && v.tipo === "cambia" ? "Prima di firmare, controlla che il tuo medico sia nella lista della nuova cassa: Giorgio lo verifica con te." : null;
+
+    if (v.tipo === "cambia") {
+      out.push(v.almeno ?
+        "Con " + nomeBest + " paghi " + chf(best.v, true) + " al mese. Anche con il prodotto più economico che potresti avere oggi, sono almeno " + chf(v.s) + " in meno all’anno." :
+        "Con " + nomeBest + " paghi " + chf(best.v, true) + " al mese invece di " + chf(R.cur, true) + ": circa " + chf(v.s) + " in meno all’anno.");
+      if (R.catOggi && best.cat === R.catOggi) out.push("È lo stesso tipo di modello che hai oggi (" + MOD_MINUSC[best.cat].replace(" (telefono o app)", "") + "): cambia la cassa, non il modo di curarti.");
+      else out.push("È un modello che hai indicato fra quelli che ti vanno bene: " + PRIMO_PASSO[best.cat] + ".");
+      extra = [infTip, frTip, medTip, modTip, "Le cure pagate sono le stesse: per l’assicurazione di base le fissa la legge, uguali per tutte le casse."];
+    } else if (v.tipo === "bene") {
+      if (v.almassimo) out.push("Qualunque sia il tuo prodotto di " + esc(nomeCassa(R.cassa)) + ", con un’altra cassa risparmieresti al massimo " + chf(Math.max(v.s, 0)) + " all’anno.");
+      else if (v.s < 0.5) out.push("Fra i modelli che ti vanno bene, la tua polizza è già la più conveniente con la franchigia CHF " + fmt(R.F) + ".");
+      else out.push("La migliore alternativa per te, " + nomeBest + ", costa solo " + chf(v.s) + " in meno all’anno.");
+      out.push("Sotto " + chf(SOGLIA) + " all’anno il cambio non vale la pena: nuova cassa, nuova tessera, nuove regole.");
+      var frGiusta = an && an.migliore && R.F !== null && an.migliore.f === R.F && R.ref && R.ref.num === R.cassa ?
+        "Anche la franchigia CHF " + fmt(R.F) + " è quella giusta per le tue spese." : null;
+      extra = [frTip, frGiusta, modTip, infTip, "Le cure pagate sono le stesse in tutte le casse: per l’assicurazione di base conta solo il premio."];
+    } else if (v.motivo === "prodotto") {
+      out.push(esc(nomeCassa(R.cassa)) + " ha più prodotti di questo tipo, con premi diversi: da " + chf(R.range.min, true) + " a " + chf(R.range.max, true) + " al mese.");
+      out.push("Il premio più basso per te è " + chf(best.v, true) + " al mese, con " + nomeBest + ".");
+      out.push("Se la tua lettera dice più di " + chf(v.soglia, true) + " al mese, ti conviene cambiare. Scrivi il premio della lettera e la pagina ti dà il risparmio esatto.");
+      extra = [frTip, modTip, infTip];
+    } else if (v.motivo === "premio") {
+      out.push("Mi manca quanto paghi oggi: senza cassa e prodotto non posso calcolarlo.");
+      out.push("Il premio più basso per te è " + chf(best.v, true) + " al mese, con " + nomeBest + ".");
+      out.push("Se la tua lettera dice più di " + chf(v.soglia, true) + " al mese, ti conviene cambiare. Scrivi il premio della lettera e la pagina ti dà il risparmio esatto.");
+      extra = [modTip, infTip];
+    } else if (v.motivo === "franchigia") {
+      out.push("Mi manca la tua franchigia di oggi, e il confronto si fa a parità di franchigia.");
+      out.push("Con le tue spese conviene la franchigia CHF " + fmt(R.Fcmp) + ": lì il premio più basso per te è " + chf(best.v, true) + " al mese, con " + nomeBest + ".");
+      out.push("Scrivi la franchigia (è sulla polizza) e la pagina ti dà il risparmio esatto.");
+      extra = [modTip, infTip];
+    } else if (v.motivo === "nessuna") {
+      out.push("Con le preferenze che hai scelto non trovo alternative con questa franchigia.");
+      out.push("Prova ad accettare un modello in più nella domanda «Nel 2027, cosa ti va bene?».");
+    }
+    extra.forEach(function (t) { if (t && out.length < 4) out.push(t); });
+    return out;
+  }
+
+  function sezFranchigia(R) {
+    var an = R.an, m = an.migliore, am = ALIQ_MAX[R.fa];
+    var h = '<h3><span class="h-ico">' + ico("monete", 22) + '</span>La franchigia giusta per le tue spese</h3>' +
+      '<p class="sotto">Costo totale in un anno = 12 premi + le spese che paghi tu: tutto fino alla franchigia, poi il 10&nbsp;% fino a ' + chf(am) + '.</p>' +
+      '<div class="pills" id="g-liv" role="group" aria-label="Livello di spese">' +
+        ["basso", "medio", "alto"].map(function (k) {
+          return '<button type="button" class="pill" data-v="' + k + '" aria-pressed="' + (an.liv === k) + '">' + LIVELLI[k].charAt(0).toUpperCase() + LIVELLI[k].slice(1) + ', ' + chf(SPESE[k]) + '</button>';
+        }).join("") + '</div>' +
+      '<p class="nota" style="margin-top:8px">' + (an.liv === R.livStimato ? "È il livello stimato dalle tue risposte." : "Dalle tue risposte la stima è: " + LIVELLI[R.livStimato] + ".") + '</p>' +
+      '<div class="card"><div class="legenda"><span><i class="p"></i>12 premi</span><span><i class="s"></i>spese a tuo carico</span></div>' +
+      '<div id="grafico" role="img" aria-label="Costo totale in un anno per franchigia; i numeri sono anche nella tabella qui sotto"></div>' +
+      '<p class="nota" style="margin:6px 0 0">Con ' + esc(nomeCassa(an.num)) + ', ' + esc(nomeProd(an.num, an.code, true)) + ', ' + infTesto(an.inf) + '. Tocca una barra per il dettaglio.</p></div>';
+    var testo = "Con " + LIVELLI[an.liv] + " la franchigia che costa meno è <b>CHF " + fmt(m.f) + "</b>: in tutto circa " + chf(m.tot) + " all’anno.";
+    if (R.F !== null && an.perF[R.F] && R.F !== m.f) {
+      var d = Math.round(an.perF[R.F].tot) - Math.round(m.tot);
+      testo += d >= 1 ? " Rispetto alla tua franchigia di oggi (CHF " + fmt(R.F) + ") sono circa " + chf(d) + " in meno." : "";
+    } else if (R.F !== null && R.F === m.f) testo += " È quella che hai già.";
+    var d2 = an.seconda ? Math.round(an.seconda.tot) - Math.round(m.tot) : null;
+    if (d2 !== null && d2 < SOGLIA) testo += d2 >= 1 ? " La differenza con la franchigia CHF " + fmt(an.seconda.f) + " è piccola (" + chf(d2) + "): conta quanto rischio vuoi prenderti." :
+      " Con la franchigia CHF " + fmt(an.seconda.f) + " costa praticamente uguale: conta quanto rischio vuoi prenderti.";
+    h += '<div class="box" style="margin-top:14px">' + testo + '</div>' +
+      '<p class="nota">Nell’anno peggiore, con la franchigia CHF ' + fmt(m.f) + ' paghi di tasca tua al massimo ' + chf(m.f + am) + ' oltre ai premi.</p>' +
+      '<details><summary>Vedi i numeri in tabella</summary><div class="card"><table><thead><tr><th>Franchigia</th><th class="n">12 premi</th><th class="n">A tuo carico</th><th class="n">Totale</th></tr></thead><tbody>' +
+        an.righe.map(function (r) {
+          return '<tr' + (r.f === m.f ? ' class="forte"' : '') + '><td>' + fmt(r.f) + (r.f === R.F ? ' <span class="tag">la tua</span>' : '') + '</td><td class="n">' + fmt(Math.round(r.premi)) + '</td><td class="n">' + fmt(Math.round(r.carico)) + '</td><td class="n">' + fmt(Math.round(r.tot)) + '</td></tr>';
+        }).join("") + '</tbody></table></div></details>' +
+      '<p class="nota">Ipotesi: fatture mediche all’anno di ' + chf(SPESE.basso) + ', ' + chf(SPESE.medio) + ' o ' + chf(SPESE.alto) + ' per i tre livelli. Per gli adulti, in ospedale si aggiungono CHF 15 al giorno: qui non sono contati. ' +
+      'La franchigia la puoi cambiare anche restando nella tua cassa: per abbassarla la comunicazione deve arrivare entro ' + DATE.arrivo + ', per alzarla entro ' + DATE.alzare + '.</p>';
+    return h;
+  }
+
+  function pathBarra(xa, xb, y, h, tondo, cls) {
+    if (xb - xa < 1) return "";
+    var r = tondo ? Math.min(4, (xb - xa) / 2, h / 2) : 0;
+    if (!r) return '<rect class="' + cls + '" x="' + xa.toFixed(1) + '" y="' + y + '" width="' + (xb - xa).toFixed(1) + '" height="' + h + '"/>';
+    return '<path class="' + cls + '" d="M' + xa.toFixed(1) + ' ' + y + 'H' + (xb - r).toFixed(1) + 'Q' + xb.toFixed(1) + ' ' + y + ' ' + xb.toFixed(1) + ' ' + (y + r) +
+      'V' + (y + h - r) + 'Q' + xb.toFixed(1) + ' ' + (y + h) + ' ' + (xb - r).toFixed(1) + ' ' + (y + h) + 'H' + xa.toFixed(1) + 'Z"/>';
+  }
+  function disegnaGrafico() {
+    var box = $("grafico"), R = R_ULTIMO;
+    if (!box || !R || !R.an) return;
+    var an = R.an, righe = an.righe, m = an.migliore;
+    var W = Math.max(240, Math.floor(box.clientWidth)), pad = 2, rowH = 60, H = righe.length * rowH;
+    var max = 0; righe.forEach(function (r) { if (r.tot > max) max = r.tot; });
+    var wTot = W - 2 * pad, sc = function (x) { return x / max * wTot; };
+    var s = '<svg class="graf" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" aria-hidden="true">';
+    righe.forEach(function (r, i) {
+      var y = i * rowH, by = y + 30, bh = 20, best = r.f === m.f, x0 = pad;
+      s += '<g class="rg" data-i="' + i + '">';
+      if (best) s += '<path class="spunta-g" d="M' + (x0 + 1) + ' ' + (y + 14) + 'l4 4 8-9"/>';
+      s += '<text x="' + (x0 + (best ? 20 : 0)) + '" y="' + (y + 20) + '" class="' + (best ? 'forte' : '') + '">Franchigia ' + fmt(r.f) + (r.f === R.F ? ' (la tua)' : '') + '</text>';
+      s += '<text x="' + (W - pad) + '" y="' + (y + 20) + '" text-anchor="end" class="' + (best ? 'forte' : '') + '">' + chf(r.tot) + '</text>';
+      var wP = sc(r.premi), wC = sc(r.carico), conC = wC >= 3;
+      s += pathBarra(x0, x0 + wP, by, bh, !conC, "s-premi");
+      if (conC) s += pathBarra(x0 + wP + 2, x0 + wP + wC, by, bh, true, "s-spese");
+      s += '<rect class="hit" x="0" y="' + y + '" width="' + W + '" height="' + rowH + '"/></g>';
+    });
+    s += '</svg>';
+    box.innerHTML = s;
+    var svg = box.querySelector("svg");
+    function mostraTip(e, g) {
+      var r = righe[Number(g.getAttribute("data-i"))];
+      var tip = $("tip");
+      tip.innerHTML = "<b>Franchigia " + fmt(r.f) + "</b><br>12 premi: " + chf(r.premi) + "<br>A tuo carico: " + chf(r.carico) + "<br>Totale: <b>" + chf(r.tot) + "</b>";
+      tip.hidden = false;
+      var x = e.clientX + 14, y = e.clientY + 14, tw = tip.offsetWidth, th = tip.offsetHeight;
+      if (x + tw > window.innerWidth - 8) x = Math.max(8, e.clientX - tw - 14);
+      if (y + th > window.innerHeight - 8) y = Math.max(8, e.clientY - th - 14);
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    }
+    svg.querySelectorAll("g.rg").forEach(function (g) {
+      g.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") mostraTip(e, g); });
+      g.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") nascondiTip(); });
+      g.addEventListener("click", function (e) { mostraTip(e, g); });
+    });
+  }
+  function nascondiTip() { var t = $("tip"); if (t) t.hidden = true; }
+  document.addEventListener("scroll", nascondiTip, { passive: true });
+  document.addEventListener("click", function (e) { if (!(e.target.closest && e.target.closest("g.rg"))) nascondiTip(); });
+  var tRidim = null;
+  window.addEventListener("resize", function () { clearTimeout(tRidim); tRidim = setTimeout(disegnaGrafico, 150); });
+
+  function sezPassi(R) {
+    var v = R.verdetto, best = R.best, stessa = best && best.num === R.cassa;
+    if (v.tipo === "bene") {
+      return '<h3><span class="h-ico">' + ico("calcheck", 22) + '</span>Cosa fare</h3><div class="box"><p>Per la cassa non devi fare niente: la polizza continua da sola nel 2027.</p>' +
+        '<p>Se vuoi cambiare solo la franchigia, restando dove sei: per abbassarla scrivi alla cassa entro ' + DATE.arrivo + ', per alzarla entro ' + DATE.alzare + '.</p></div>';
+    }
+    var h = '<h3><span class="h-ico">' + ico("calcheck", 22) + '</span>' + (v.tipo === "cambia" ? "I passi e le date" : "Se decidi di cambiare: i passi e le date") + '</h3>';
+    if (stessa && v.tipo === "cambia") {
+      return h + '<div class="card"><table class="date-tab"><thead><tr><th>Entro</th><th>Cosa</th></tr></thead><tbody>' +
+        '<tr><td class="n">' + DATE.arrivo + '</td><td>Deve arrivare alla tua cassa la richiesta scritta di passare a ' + esc(nomeProd(best.num, best.code, true)) + '</td></tr>' +
+        '<tr><td class="n">' + DATE.inizio + '</td><td>Parte il nuovo modello</td></tr></tbody></table></div>' +
+        '<ol class="passi"><li><b>Resti nella tua cassa.</b> Niente disdetta: chiedi per iscritto di cambiare modello. Giorgio ti prepara il testo.</li>' +
+        '<li><b>Mandala presto.</b> Per stare larga, spediscila entro ' + DATE.raccomandata + '.</li></ol>';
+    }
+    h += '<div class="card"><table class="date-tab"><thead><tr><th>Entro</th><th>Cosa</th></tr></thead><tbody>' +
+      '<tr><td class="n">subito</td><td>Iscriviti alla nuova cassa e aspetta la conferma scritta</td></tr>' +
+      '<tr><td class="n">' + DATE.raccomandata + '</td><td>Spedisci la disdetta alla cassa di oggi, per raccomandata</td></tr>' +
+      '<tr><td class="n">' + DATE.arrivo + '</td><td>La disdetta deve essere <b>arrivata</b> alla cassa di oggi</td></tr>' +
+      '<tr><td class="n">' + DATE.inizio + '</td><td>Sei assicurata con la nuova cassa</td></tr>' +
+      '</tbody></table></div>' +
+      '<ol class="passi">' +
+        '<li><b>Prima la nuova cassa.</b> Chiedi l’iscrizione alla nuova cassa: per l’assicurazione di base deve accettarti, senza domande sulla salute. Giorgio ti aiuta con il modulo.</li>' +
+        '<li><b>Poi la disdetta.</b> Mandala alla cassa di oggi per raccomandata entro ' + DATE.raccomandata + '. Conta il giorno in cui arriva: deve essere lì entro ' + DATE.arrivo + '. Giorgio te la prepara.</li>' +
+        '<li><b>Niente arretrati.</b> Se hai premi o fatture della cassa ancora da pagare, la disdetta non vale: saldali prima.</li>' +
+        '<li><b>Complementari: non disdirle prima del tempo.</b> Toccale solo dopo l’accettazione scritta della nuova cassa: per le complementari la cassa può fare domande sulla salute e anche dire di no.</li>' +
+      '</ol>';
+    return h;
+  }
+
+  function notaComplementari(R) {
+    var c = S.compl, cambia = R.verdetto.tipo !== "bene";
+    if (!c.length) return cambia ? "Se hai complementari, possono restare nella cassa di oggi anche se cambi la base. Non disdirle prima di avere l’accettazione scritta della nuova cassa." : "";
+    if (c.indexOf("nessuna") >= 0) return cambia ? "Non hai complementari: per cambiare ti basta spostare l’assicurazione di base." : "";
+    if (c.indexOf("nonso") >= 0) return "Guarda la polizza: le complementari sono le righe oltre all’assicurazione di base (LAMal). Nel dubbio, non disdire niente oltre alla base e chiedi a Giorgio.";
+    var nomi = { dentista: "dentista", ospedale: "ospedale", altro: "altre coperture" }, el = c.map(function (k) { return nomi[k]; }).filter(Boolean);
+    var t = "Hai complementari (" + el.join(", ") + "). ";
+    if (cambia) t += "Possono restare nella cassa di oggi anche se cambi la base: base e complementari non devono stare insieme. Non disdirle prima di avere l’accettazione scritta della nuova cassa. Giorgio controlla con te se alla tua complementare è legato uno sconto per chi ha anche la base.";
+    else t += "Restano come sono. Se vuoi, Giorgio guarda con te se coprono ancora quello che ti serve.";
+    return t;
+  }
+
+  function righeRisposte(R) {
+    function riga(et, val, id) { return '<tr><td>' + et + '<br><span class="nota">' + val + '</span></td><td class="n"><a href="#" data-vai="' + id + '">modifica</a></td></tr>'; }
+    var NS = { si: "Sì", no: "No", nonso: "Non lo so" };
+    var mod = { libero: "Scelgo io il medico", medico: "Medico di famiglia", hmo: "Rete HMO", tel: "Telmed", altro: "Altro", nonso: "Non lo so" };
+    var pref = { libero: "qualsiasi medico", medico: "medico di famiglia", hmo: "rete HMO", tel: "Telmed", farmacia: "farmacia" };
+    var compl = { dentista: "dentista", ospedale: "ospedale", altro: "altro", nessuna: "nessuna", nonso: "non lo so" };
+    var vis = {}; visibili().forEach(function (p) { vis[p.id] = true; });
+    var h = riga("Anno di nascita", S.nascita ? esc(S.nascita) + (R.eta !== null ? " (" + R.eta + " anni nel 2027)" : "") : "—", "nascita") +
+      riga("Domicilio", R.luogo ? esc(S.npa + " " + dove(R.luogo)) : esc(S.npa), "npa") +
+      riga("Almeno 8 ore per lo stesso datore", NS[S.lavoro] || "senza risposta", "lavoro") +
+      (S.lavoro === "si" ? riga("Infortunio nella polizza di oggi", NS[S.infOggi] || "senza risposta", "lavoro") : "") +
+      riga("Cassa di oggi", isCassa(S.cassa) ? esc(nomeCassa(S.cassa)) : S.cassa === "nonso" ? "Non lo so" : "senza risposta", "cassa") +
+      riga("Modello di oggi", mod[S.modello] || "senza risposta", "modello") +
+      (vis.prodotto ? riga("Prodotto", S.prodotto === "nonso" ? "Non lo riconosco" : prodScelto() ? esc(nomeProd(S.cassa, prodScelto())) : "senza risposta", "prodotto") : "") +
+      riga("Franchigia di oggi", typeof S.franchigia === "number" ? "CHF " + fmt(S.franchigia) : S.franchigia === "nonso" ? "Non lo so" : "senza risposta", "franchigia") +
+      riga("Premio della lettera", S.lettera ? chf(Number(S.lettera), true) + " al mese" : "non scritto", "lettera") +
+      riga("Ti va bene", S.pref.length ? S.pref.map(function (k) { return pref[k]; }).join(", ") : "come oggi", "pref") +
+      riga("Spese sanitarie", LIVELLI[R.livStimato], "spese") +
+      riga("Complementari", S.compl.length ? S.compl.map(function (k) { return compl[k]; }).join(", ") : "senza risposta", "compl");
+    return h;
+  }
+
+  function datiDaInviare() {
+    var R = R_ULTIMO || calcola(), v = R.verdetto;
+    return {
+      tipo: "svag-lamal-2027", versione: VERSIONE, creato: adesso(), nome: S.nome,
+      risposte: {
+        nascita: S.nascita || null, npa: S.npa || null, comune_ust: R.luogo && R.luogo.bfs ? R.luogo.bfs : null,
+        lavoro_8_ore: S.lavoro, infortunio_oggi: S.infOggi,
+        cassa: isCassa(S.cassa) ? Number(S.cassa) : S.cassa, modello: S.modello, prodotto: S.prodotto,
+        franchigia: S.franchigia, premio_lettera: S.lettera ? Number(S.lettera) : null,
+        va_bene: S.pref, visite: S.visite, farmaci: S.farmaci, cure: S.cure, complementari: S.compl
+      },
+      risultato: {
+        fascia: R.fa, regione: R.reg ? Number(R.reg) : null, comune: R.luogo ? R.luogo.c : null,
+        cassa: R.cassa ? nomeCassa(R.cassa) : null, prodotto: R.cassa && R.prod ? nomeProd(R.cassa, R.prod) : null, codice_prodotto: R.prod,
+        franchigia: R.F, infortunio: R.infOggi === "U", premio_mese: R.cur, fonte_premio: R.fonte,
+        verdetto: v.tipo, motivo: v.motivo || null,
+        risparmio_anno: v.tipo === "cambia" || v.tipo === "bene" ? Math.round(v.s) : null,
+        franchigia_confronto: R.Fcmp, infortunio_alternative: R.infTarget === "U",
+        alternative: R.alts.slice(0, 3).map(function (a) {
+          return { cassa: a.nome, n_ufsp: Number(a.num), prodotto: nomeProd(a.num, a.code), premio_mese: a.v,
+            risparmio_anno: R.cur !== null && R.F !== null ? Math.round((R.cur - a.v) * 12) : null };
+        }),
+        livello_spese: R.liv, spese_ipotesi: SPESE[R.liv],
+        franchigia_consigliata: R.an && R.an.migliore ? R.an.migliore.f : null
+      },
+      dati: "UFSP premi 2027 Ticino, elaborati il " + D.generato
+    };
+  }
+  function messaggio() {
+    var d = datiDaInviare(), g = d.creato.slice(0, 10);
+    var art = /^(08|11)\./.test(g) ? "l'" : "il ";
+    return "Ciao Giorgio, ecco le mie risposte sulla cassa malati 2027" + (S.nome ? " (" + S.nome + ")" : "") + ", compilate " + art + g + ".\n" +
+      "La pagina dice: " + verdettoFrase(R_ULTIMO || calcola()) + ".\n" +
+      "Il testo qui sotto serve al tuo programma ed è giusto così: va mandato com'è.\n\n" + JSON.stringify(d);
+  }
+
+  function cRisultato() {
+    app.querySelectorAll("[data-vai]").forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); mostra(a.getAttribute("data-vai"), true); });
+    });
+    if (!R_ULTIMO || !R_ULTIMO.reg || !R_ULTIMO.fa) return;
+    disegnaGrafico();
+    var gl = $("g-liv");
+    if (gl) gl.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("button.pill") : null; if (!b) return;
+      var k = b.getAttribute("data-v");
+      S.livello = k === R_ULTIMO.livStimato ? null : k; salva();
+      var y = window.scrollY;                 // un clic, non la digitazione: si ridisegna il risultato al suo posto
+      app.innerHTML = '<div>' + pRisultato() + '</div>'; cRisultato();
+      window.scrollTo(0, y);
+      var nb = app.querySelector('#g-liv button[data-v="' + k + '"]'); if (nb) nb.focus({ preventScroll: true });
+    });
+    var nome = $("nome"), pre = $("json"), esito = $("esito");
+    function aggJson() { pre.textContent = JSON.stringify(datiDaInviare(), null, 1); }
+    aggJson();
+    nome.addEventListener("input", function () { S.nome = nome.value.trim(); salva(); aggJson(); });
+    $("whatsapp").addEventListener("click", function () {
+      var url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(messaggio());
+      // senza «noopener» fra le opzioni: con quello window.open risponde sempre null e si aprirebbe due volte
+      var w = window.open(url, "_blank");
+      if (w) { try { w.opener = null; } catch (e) {} } else location.href = url;
+      esito.textContent = "Se si è aperto WhatsApp, premi Invia: il testo con le parentesi è giusto così.";
+    });
+    $("email").addEventListener("click", function () {
+      var sogg = "La mia cassa malati 2027" + (S.nome ? " - " + S.nome : "");
+      location.href = "mailto:" + DESTINATARIO + "?subject=" + encodeURIComponent(sogg) + "&body=" + encodeURIComponent(messaggio() + "\n");
+      esito.textContent = "Se si è aperta la posta, premi Invia. Le risposte restano anche qui.";
+    });
+    $("copia").addEventListener("click", function () {
+      var t = messaggio();
+      function ok() { esito.textContent = "Copiato. È normale che sia pieno di parentesi: incollalo così com’è in un messaggio a Giorgio."; }
+      function ko() { esito.textContent = "Copia non riuscita: apri «Vedi i dati che invii» e copiali a mano."; }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, function () { copiaVecchia(t) ? ok() : ko(); });
+      else if (copiaVecchia(t)) ok(); else ko();
+    });
+    $("cancella").addEventListener("click", function () {
+      if (!confirm("Cancellare le tue risposte da questo dispositivo? Quelle già mandate a Giorgio restano a lui.")) return;
+      try { localStorage.removeItem(CHIAVE); } catch (e) {}
+      S = applicaPre(statoVuoto()); ripreso = false;
+      mostra("benvenuto");
+    });
+  }
+  function copiaVecchia(t) {
+    var ta = document.createElement("textarea");
+    ta.value = t; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+    ta.remove(); return ok;
+  }
+
+  function avvia() {
+    CASSE = Object.keys(D.assicuratori).map(function (k) { var a = D.assicuratori[k]; return { num: k, nome: a.nome, gruppo: a.gruppo }; })
+      .sort(function (a, b) { return chiaveOrd(a.nome).localeCompare(chiaveOrd(b.nome)); });
+    leggiPre(); leggiStato();
+    $("indietro").addEventListener("click", indietro);
+    $("avanti").addEventListener("click", avanti);
+    mostra(S.passo);
+  }
+})();
+</script>
+</body>
+</html>
