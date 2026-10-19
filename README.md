@@ -1,6 +1,6 @@
 # La tua cassa malati 2027: ti conviene cambiare? — pagina SVAG
 
-Versione **1.0** del 19.10.2026. Copia **locale**: nessun repository remoto, nessun push.
+Versione **1.0.1** del 19.10.2026 (la 1.0 rivista lo stesso giorno: vedi «Revisione del 19.10.2026»). Copia **locale**: nessun repository remoto, nessun push.
 Si pubblica solo quando Giorgio lo decide.
 
 Pagina statica che una persona apre dal telefono, come il wizard del budget (v1.5) e il wizard RC auto:
@@ -59,7 +59,9 @@ Mentre si scrive non si ridisegna niente: si aggiorna solo la riga sotto il camp
 - **Premio di oggi.** Il premio della lettera, se c'è; altrimenti i dati UFSP per cassa, prodotto, regione,
   fascia, franchigia e infortunio. Senza prodotto esatto la pagina usa la forchetta dei prodotti di quella
   cassa e di quel modello.
-- **Premio della lettera.** Se combacia al centesimo con i dati della cassa indicata, completa franchigia,
+- **Premio della lettera.** Oltre CHF 1'500 al mese la pagina lo tratta come un importo all'anno: lo segnala,
+  blocca «Avanti» e non lo usa nei conti. Se è più basso di ogni premio 2027 per quell'età e quella regione,
+  chiede di controllare sussidi e rimborso della tassa ambientale. Se combacia al centesimo con i dati della cassa indicata, completa franchigia,
   prodotto e infortunio mancanti. Con la cassa «Non lo so» la pagina mostra con chi combacia e chiede
   «È la tua cassa?»: conta solo se la persona tocca «Sì, è la mia». Motivo: nel collaudo il premio tondo
   540.00 combaciava per caso con un prodotto sana24.
@@ -69,7 +71,9 @@ Mentre si scrive non si ridisegna niente: si aggiorna solo la riga sotto il camp
 - **Alternative.** Stessa franchigia, la più economica per ogni cassa, solo modelli compatibili con la
   domanda 9. Il modello standard va sempre bene; i modelli flessibili vanno bene a chi accetta il medico
   di famiglia o il Telmed. La polizza di oggi è esclusa, gli altri prodotti della stessa cassa no
-  (etichetta «la tua cassa»).
+  (etichetta «la tua cassa»). Se oggi c'è l'infortunio e il datore di lavoro lo copre, la stessa polizza
+  senza infortunio è un'alternativa (etichetta «la tua polizza, senza infortunio»; a parità di premio vince
+  lei): il risultato dice allora «Ti conviene togliere l'infortunio», con i passi per restare nella cassa.
 - **Verdetto.** Risparmio all'anno = 12 × (premio di oggi − migliore alternativa).
   - da CHF 120 in su: «Ti conviene cambiare: risparmi circa X all'anno»;
   - sotto CHF 120: «Sei già messa bene»;
@@ -96,8 +100,8 @@ Il testo qui sotto serve al tuo programma ed è giusto così: va mandato com'è.
 
 | Chiave | Cosa contiene |
 |---|---|
-| `tipo`, `versione`, `creato`, `nome` | `svag-lamal-2027`, `1.0`, `GG.MM.AAAA hh:mm`, il nome se scritto |
-| `risposte` | le risposte così come date: `nascita`, `npa`, `comune_ust`, `lavoro_8_ore`, `infortunio_oggi`, `cassa` (n. UFSP o `nonso`), `modello`, `prodotto` (codice UFSP), `franchigia`, `premio_lettera`, `va_bene`, `visite`, `farmaci`, `cure`, `complementari` |
+| `tipo`, `versione`, `creato`, `nome` | `svag-lamal-2027`, `1.0.1`, `GG.MM.AAAA hh:mm`, il nome se scritto |
+| `risposte` | le risposte così come date: `nascita` (solo l'anno), `npa`, `comune_ust`, `lavoro_8_ore`, `infortunio_oggi`, `cassa` (n. UFSP o `nonso`), `modello`, `prodotto` (codice UFSP), `franchigia`, `premio_lettera`, `va_bene`, `complementari`. Le risposte su visite, farmaci e cure **non partono**: restano sul dispositivo e a Giorgio arriva solo `livello_spese` |
 | `risultato` | quello che la pagina ha mostrato: fascia, regione, comune, cassa e prodotto (anche dedotti), franchigia, `premio_mese`, `fonte_premio` (`lettera` o `dati`), `verdetto` (`cambia`, `bene`, `dipende`) e `motivo`, `risparmio_anno`, `franchigia_confronto`, le 3 `alternative` con premio e risparmio, `livello_spese`, `spese_ipotesi`, `franchigia_consigliata` |
 | `dati` | anno dei premi e data di elaborazione |
 
@@ -126,8 +130,9 @@ scorrimento orizzontale.
 
 ## Limiti
 
-- WhatsApp ed e-mail non sono stati aperti davvero. Il link `wa.me` è di circa 2'200 caratteri: alcuni
-  programmi di posta (Outlook su Windows) tagliano i `mailto:` oltre circa 2'000. Resta «Copia».
+- WhatsApp ed e-mail non sono stati aperti davvero. Il link `wa.me` è di circa 2'150 caratteri e il `mailto:`
+  di circa 2'200: alcuni programmi di posta (Outlook su Windows) tagliano i `mailto:` oltre circa 2'000.
+  Resta «Copia».
 - Le spese per livello (500, 2'000, 6'000) sono ipotesi, non dati: la franchigia consigliata è
   indicativa, e con spese medie la differenza fra franchigie è spesso di pochi franchi.
 - Con il medico di famiglia e i modelli flessibili la pagina non sa se il medico è nella lista della
@@ -137,3 +142,27 @@ scorrimento orizzontale.
   famiglia.
 - Il contributo ospedaliero di CHF 15 al giorno e i sussidi RIPAM (riduzione individuale dei premi) non
   entrano nei conti.
+
+## Revisione del 19.10.2026 (versione 1.0.1)
+
+Revisione a parte della 1.0, con le correzioni fatte nello stesso giro:
+
+- **Infortunio e polizza di oggi.** La 1.0 escludeva sempre la polizza di oggi dalle alternative, anche
+  quando il confronto è senza infortunio e oggi l'infortunio c'è. Caso: giovane con Sanitas Medico di
+  famiglia 1, franchigia 2'500, con infortunio, lavora, accetta solo il medico di famiglia. La 1.0 proponeva
+  Sanitas Medico di famiglia 2 (CHF 301.70, risparmio CHF 212 all'anno, altra lista di medici); togliendo
+  solo l'infortunio la stessa polizza scende a CHF 297.35 (CHF 265 all'anno). Ora è il caso 6 di
+  `prove/riferimento.py`; il caso 5 è KPTwin.plus con infortunio (CHF 508.60 → 473.00, CHF 427 all'anno).
+- **Messaggio a Giorgio.** Tolte dal JSON le risposte su visite, farmaci e cure (dati sulla salute): resta il
+  livello di spese. Il testo del messaggio è di circa 1'400 caratteri; codificati nel link diventano circa
+  2'150 (`wa.me`) e 2'200 (`mailto:`), quindi l'e-mail resta sopra i 2'000.
+- **Premio della lettera.** Importi all'anno bloccati e fuori dai conti (prima entravano: CHF 6'000 «al mese»
+  poteva dare un risparmio di decine di migliaia di franchi); cifra illeggibile bloccata; avviso sotto il minimo di
+  mercato; nella domanda, «prima del rimborso della tassa ambientale».
+- **Testi.** «cambia la cassa, non il modo di curarti» tolto; con la stessa cassa la pagina non dice più
+  «cambia la cassa»; CHF e IP sciolti alla prima comparsa; chi riceve l'indennità di disoccupazione è coperto
+  per gli infortuni e risponde «Sì»; sotto le casse, chi non ha ancora una cassa svizzera è mandato da Giorgio
+  (obbligo entro 3 mesi dall'arrivo); con il premio della lettera, l'infortunio sconosciuto non è più
+  descritto come «ipotesi» del calcolo; «gruppo Groupe Mutuel» → «Groupe Mutuel».
+- **Accessibilità.** Ogni gruppo di scelte ha il nome della sua domanda (lettori di schermo).
+

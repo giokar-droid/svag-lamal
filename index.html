@@ -269,16 +269,17 @@ nav.barra .invisibile { visibility: hidden; }
 <script>
 (function () {
   "use strict";
-  // «La tua cassa malati 2027: ti conviene cambiare?», versione 1.0 (19.10.2026).
+  // «La tua cassa malati 2027: ti conviene cambiare?», versione 1.0.1 (19.10.2026, dopo la revisione).
   // Pagina statica: legge i premi UFSP 2027 del Ticino da dati/ e fa i conti sul dispositivo di chi la apre.
   // Non trasmette niente: le risposte partono solo se è la persona a mandarle a Giorgio.
-  var VERSIONE = "1.0";
+  var VERSIONE = "1.0.1";
   var DESTINATARIO = "giorgio.carrara@svag.ch";
   var WHATSAPP = "41788716900", WHATSAPP_LEGGIBILE = "+41 78 871 69 00";
   var CHIAVE = "svag-lamal-2027-v1";          // «Cancella» toglie solo questa chiave
   var CHIAVE_TEMA = "svag-lamal-tema";
   var ANNO = 2027;
   var SOGLIA = 120;                           // sotto CHF 120 all'anno il cambio non vale la pena
+  var LETTERA_MAX = 1500;                     // oltre, non è un premio di base al mese (all'anno, o con le complementari)
   var SPESE = { basso: 500, medio: 2000, alto: 6000 };   // ipotesi di fatture mediche all'anno, dichiarate nella pagina
   var LIVELLI = { basso: "poche spese", medio: "spese medie", alto: "molte spese" };
   var ALIQ_MAX = { E: 700, J: 700, K: 350 };  // aliquota del 10 %, tetto annuo
@@ -598,11 +599,13 @@ nav.barra .invisibile { visibility: hidden; }
     var perCassa = {};
     Object.keys(D.assicuratori).forEach(function (num) {
       prodotti(num).forEach(function (x) {
+        // la polizza di oggi non è un'alternativa; lo stesso prodotto senza infortunio sì (lo copre il datore di lavoro)
+        var stessoProd = num === R.cassa && x.code === R.prod;
+        if (stessoProd && inf === R.infOggi) return;
         if (!compatibile(x.cat, acc)) return;
-        if (num === R.cassa && x.code === R.prod) return;      // la polizza di oggi non è un'alternativa
         var v = premio(num, x.code, R.reg, R.fa, F, inf); if (v === null) return;
         var b = perCassa[num];
-        if (!b || v < b.v) perCassa[num] = { num: num, code: x.code, v: v, cat: x.cat, nome: nomeCassa(num) };
+        if (!b || v < b.v || (v === b.v && stessoProd)) perCassa[num] = { num: num, code: x.code, v: v, cat: x.cat, nome: nomeCassa(num), stesso: stessoProd };
       });
     });
     return Object.keys(perCassa).map(function (k) { return perCassa[k]; })
@@ -627,6 +630,9 @@ nav.barra .invisibile { visibility: hidden; }
     R.frs = R.fa ? franchigie(R.fa) : [];
     R.infTarget = S.lavoro === "si" ? "N" : "U";
     R.lettera = S.lettera !== "" && S.lettera !== null && isFinite(Number(S.lettera)) && Number(S.lettera) > 0 ? Number(S.lettera) : null;
+    // oltre CHF 1'500 al mese non è un premio di base: non entra nei conti (la domanda lo segnala e blocca «Avanti»)
+    R.letteraFuori = R.lettera !== null && R.lettera > LETTERA_MAX;
+    if (R.letteraFuori) R.lettera = null;
     // Il premio della lettera completa le risposte solo dentro la cassa che hai indicato. Con la cassa
     // «non lo so» un premio tondo può combaciare per caso con un altro prodotto: lì la pagina propone,
     // e conta solo se la persona conferma («Sì, è la mia»).
@@ -723,7 +729,7 @@ nav.barra .invisibile { visibility: hidden; }
     { id: "modello", r: pModello, c: cModello, et: "Modello di oggi" },
     { id: "prodotto", r: pProdotto, c: cProdotto, et: "Prodotto", vis: function () { return isCassa(S.cassa) && !!S.modello && prodottiFiltrati().length !== 1; } },
     { id: "franchigia", r: pFranchigia, c: cFranchigia, et: "Franchigia di oggi" },
-    { id: "lettera", r: pLettera, c: cLettera, et: "Premio della lettera" },
+    { id: "lettera", r: pLettera, c: cLettera, ok: okLettera, et: "Premio della lettera" },
     { id: "pref", r: pPref, c: cPref, et: "Cosa ti va bene" },
     { id: "spese", r: pSpese, c: cSpese, et: "Spese sanitarie" },
     { id: "compl", r: pCompl, c: cCompl, et: "Complementari" },
@@ -822,7 +828,7 @@ nav.barra .invisibile { visibility: hidden; }
         '<li><b>I conti li fa la pagina sul tuo dispositivo</b>, con i premi ufficiali scaricati insieme alla pagina.</li>' +
         '<li><b>Escono solo se le mandi tu</b>, per WhatsApp o per e-mail, a un unico destinatario: Giorgio Carrara, SVAG (' + WHATSAPP_LEGGIBILE + ', ' + DESTINATARIO + ').</li>' +
         '<li><b>Servono a Giorgio per la consulenza SVAG.</b> Una volta ricevute, sono trattate secondo la legge federale sulla protezione dei dati (nLPD).</li>' +
-        '<li><b>Niente cookie né statistiche.</b> Come ogni sito, il servizio che ospita la pagina (GitHub Pages) registra per sicurezza l’indirizzo IP di chi la visita, ma non riceve le tue risposte.</li>' +
+        '<li><b>Niente cookie né statistiche.</b> Come ogni sito, il servizio che ospita la pagina (GitHub Pages) registra per sicurezza l’indirizzo IP (il numero della connessione internet) di chi la visita, ma non riceve le tue risposte.</li>' +
         '<li><b>Le cancelli quando vuoi</b> da questo dispositivo, con il pulsante in fondo al risultato.</li>' +
       '</ul></div>';
   }
@@ -892,7 +898,7 @@ nav.barra .invisibile { visibility: hidden; }
     var regs = regioniDi(cs);
     if (regs.length > 1) {
       o.className = "esito-campo"; o.innerHTML = ico("info", 18) + "<span>Questo NPA è diviso fra più comuni, con premi diversi. In quale comune abiti?</span>";
-      box.innerHTML = '<div class="opzioni" id="g-comune" style="margin-top:12px">' + cs.map(function (c) {
+      box.innerHTML = '<div class="opzioni" id="g-comune" role="group" aria-label="Il tuo comune" style="margin-top:12px">' + cs.map(function (c) {
         return opz(String(c.bfs), esc(c.c), esc(c.l.join(", ")) + ", regione di premio " + c.r, null, S.bfs === c.bfs);
       }).join("") + '</div>';
       scelta($("g-comune"), function (v) { S.bfs = Number(v); salva(); scriviEsitoNpa(); });
@@ -919,16 +925,16 @@ nav.barra .invisibile { visibility: hidden; }
   // ── lavoro e infortunio
   function pLavoro() {
     return testa("lavoro", "Lavori almeno 8 ore a settimana per lo stesso datore di lavoro?",
-        "Se sì, gli infortuni li copre già l’assicurazione del datore di lavoro (LAINF, legge federale sull’assicurazione contro gli infortuni). Allora nella cassa malati puoi toglierli e pagare meno.") +
-      '<div class="opzioni" id="g-lavoro">' +
+        "Se sì, gli infortuni li copre già l’assicurazione del datore di lavoro (LAINF, legge federale sull’assicurazione contro gli infortuni). Allora nella cassa malati puoi toglierli e pagare meno. Se ricevi l’indennità di disoccupazione sei coperta anche tu: rispondi «Sì».") +
+      '<div class="opzioni" id="g-lavoro" role="group" aria-labelledby="qt">' +
         opz("si", "Sì", "almeno 8 ore a settimana con lo stesso datore", null, S.lavoro === "si") +
         opz("no", "No", "meno ore, lavoro in proprio o non lavoro", null, S.lavoro === "no") +
         opz("nonso", "Non lo so", null, null, S.lavoro === "nonso", "nonso") +
       '</div>' +
       '<div class="sotto-dom" id="sub-inf"' + (S.lavoro === "si" ? '' : ' hidden') + '>' +
-        '<p class="q2">Nella tua polizza di oggi c’è anche l’infortunio?</p>' +
+        '<p class="q2" id="q-inf">Nella tua polizza di oggi c’è anche l’infortunio?</p>' +
         '<p class="aiuto">Sulla polizza c’è scritto «con infortunio» o «senza infortunio».</p>' +
-        '<div class="opzioni" id="g-inf">' +
+        '<div class="opzioni" id="g-inf" role="group" aria-labelledby="q-inf">' +
           opz("si", "Sì, c’è", null, null, S.infOggi === "si") +
           opz("no", "No, è già senza", null, null, S.infOggi === "no") +
           opz("nonso", "Non lo so", null, null, S.infOggi === "nonso", "nonso") +
@@ -955,12 +961,13 @@ nav.barra .invisibile { visibility: hidden; }
   function pCassa() {
     return testa("scudo", "Con quale cassa malati sei oggi?",
         "Quella dell’assicurazione di base, la LAMal (legge federale sull’assicurazione malattie). Il nome è sulla tessera o sulla polizza.") +
-      '<div class="opzioni griglia tre" id="g-cassa">' +
+      '<div class="opzioni griglia tre" id="g-cassa" role="group" aria-labelledby="qt">' +
         CASSE.map(function (c) {
-          return opz(c.num, esc(c.nome), c.gruppo && c.gruppo !== c.nome ? "gruppo " + esc(c.gruppo) : null, null, S.cassa === c.num, "compatta");
+          return opz(c.num, esc(c.nome), c.gruppo && c.gruppo !== c.nome ? (/^(gruppo|groupe)\b/i.test(c.gruppo) ? esc(c.gruppo) : "gruppo " + esc(c.gruppo)) : null, null, S.cassa === c.num, "compatta");
         }).join("") +
         opz("nonso", "Non lo so, o la mia non è in elenco", null, null, S.cassa === "nonso", "nonso largo") +
-      '</div>';
+      '</div>' +
+      '<p class="nota" style="margin-top:14px">Non hai ancora una cassa malati svizzera? Scrivi subito a Giorgio (' + WHATSAPP_LEGGIBILE + '): chi si trasferisce in Svizzera deve assicurarsi entro 3 mesi dall’arrivo.</p>';
   }
   function cCassa() {
     scelta($("g-cassa"), function (v) {
@@ -973,7 +980,7 @@ nav.barra .invisibile { visibility: hidden; }
   function pModello() {
     return testa("steto", "Che modello hai oggi?",
         "È scritto sulla polizza, accanto al nome del prodotto. Dice da chi vai per primo quando stai male. HMO sta per Health Maintenance Organization: uno studio medico di gruppo.") +
-      '<div class="opzioni" id="g-mod">' +
+      '<div class="opzioni" id="g-mod" role="group" aria-labelledby="qt">' +
         opz("libero", "Scelgo io il medico", "modello standard: vai da chi vuoi", "bussola", S.modello === "libero") +
         opz("medico", "Medico di famiglia", "vai prima dal tuo medico di famiglia", "medico", S.modello === "medico") +
         opz("hmo", "Rete HMO", "vai prima in uno studio medico di gruppo", "gruppo", S.modello === "hmo") +
@@ -1000,7 +1007,7 @@ nav.barra .invisibile { visibility: hidden; }
         (vuotoFilt && S.modello && S.modello !== "nonso" ? "Non trovo prodotti di questo tipo per " + esc(a.nome) + ": ecco tutti i suoi prodotti 2027. " :
           "Sono i prodotti " + (tipo ? "di questo tipo " : "") + "di " + esc(a.nome) + " per il 2027. ") +
         "Il nome è sulla polizza o sulla lettera dei premi.") +
-      '<div class="opzioni" id="g-prod">' +
+      '<div class="opzioni" id="g-prod" role="group" aria-labelledby="qt">' +
         princ.map(riga).join("") +
         (altri.length ? '<div class="opzioni" id="altri-prod" hidden>' + altri.map(riga).join("") + '</div>' +
           '<button class="link" type="button" id="mostra-altri">Mostra anche gli altri ' + altri.length + ' prodotti di ' + esc(a.nome) + '</button>' : '') +
@@ -1027,8 +1034,8 @@ nav.barra .invisibile { visibility: hidden; }
   function pFranchigia() {
     var lista = franchigieOfferte();
     return testa("monete", "Che franchigia hai oggi?",
-        "È la parte delle spese mediche che paghi tu ogni anno, prima che la cassa cominci a pagare. La trovi sulla polizza o sulla lettera dei premi.") +
-      '<div class="opzioni griglia" id="g-fr">' +
+        "È la parte delle spese mediche che paghi tu ogni anno, prima che la cassa cominci a pagare. La trovi sulla polizza o sulla lettera dei premi. Gli importi sono in franchi svizzeri (CHF).") +
+      '<div class="opzioni griglia" id="g-fr" role="group" aria-labelledby="qt">' +
         lista.map(function (f) { return opz(String(f), "CHF " + fmt(f), null, null, S.franchigia === f, "compatta"); }).join("") +
         opz("nonso", "Non lo so", null, null, S.franchigia === "nonso", "nonso largo") +
       '</div>';
@@ -1040,7 +1047,7 @@ nav.barra .invisibile { visibility: hidden; }
   // ── premio della lettera
   function pLettera() {
     return testa("busta", "Quanto pagherai al mese nel 2027?",
-        "Lo trovi nella lettera che la cassa ti ha mandato in autunno: è il premio al mese 2027 della sola assicurazione di base, prima di eventuali sussidi (RIPAM, riduzione individuale dei premi). È facoltativo: se lo scrivi, la pagina usa il tuo.") +
+        "Lo trovi nella lettera che la cassa ti ha mandato in autunno. Scrivi il premio al mese 2027 della sola assicurazione di base, prima di eventuali sussidi (RIPAM, riduzione individuale dei premi) e prima del rimborso della tassa ambientale. È facoltativo: se lo scrivi, la pagina usa il tuo.") +
       '<div class="riga-campo"><div class="num-w"><span class="cur">CHF</span>' +
         '<input class="campo-grande" id="lettera" inputmode="decimal" autocomplete="off" placeholder="0.00" value="' +
         (S.lettera ? fmt(Number(S.lettera), true) : '') + '" aria-labelledby="qt"></div><span class="unita-t">al mese</span></div>' +
@@ -1061,12 +1068,20 @@ nav.barra .invisibile { visibility: hidden; }
     $("salta-lettera").addEventListener("click", function () { S.lettera = ""; i.value = ""; salva(); avanti(); });
     scriviLettera();
   }
+  // Avanti solo con una cifra leggibile e da premio al mese: un importo all'anno falserebbe tutto il risultato
+  function okLettera() {
+    var i = $("lettera"), n = i ? norm(i.value) : "";
+    if (n === null) { errore("lettera-esito", "Non riesco a leggere questa cifra: scrivila così, 485.30. Se non ce l’hai, tocca «Non ce l’ho sotto mano»."); i.focus(); return false; }
+    if (n !== "" && Number(n) > LETTERA_MAX) { errore("lettera-esito", "Sembra un importo all’anno, o con le complementari dentro: scrivi il premio al mese della sola base."); i.focus(); return false; }
+    return true;
+  }
   function descrizione(num, code, f, inf) {
     return esc(nomeCassa(num)) + ", " + esc(nomeProd(num, code, true)) + ", franchigia CHF " + fmt(f) + ", " + (inf === "U" ? "con infortunio" : "senza infortunio");
   }
   function scriviLettera() {
     var R = calcola(), o = $("lettera-esito"), box = $("lettera-dati");
     o.className = "esito-campo"; o.innerHTML = ""; box.hidden = true; box.innerHTML = "";
+    if (R.letteraFuori) { errore("lettera-esito", "Sembra un importo all’anno, o con le complementari dentro: scrivi il premio al mese della sola base."); return; }
     if (R.lettera === null) {
       var t = "";
       if (R.premioDati !== null) t = "Secondo i premi UFSP 2027 il tuo premio è <b>" + chf(R.premioDati, true) + "</b> al mese (" + descrizione(R.cassa, R.prod, R.F, R.infOggi) + "). Se la lettera dice lo stesso, puoi andare avanti.";
@@ -1075,7 +1090,6 @@ nav.barra .invisibile { visibility: hidden; }
       box.innerHTML = t; box.hidden = false;
       return;
     }
-    if (R.lettera > 1500) { errore("lettera-esito", "Sembra un importo all’anno, o con le complementari dentro: scrivi il premio al mese della sola base."); return; }
     if (R.match.length) {
       var m = R.match.length === 1 ? R.match[0] : null;
       o.className = "esito-campo ok";
@@ -1111,8 +1125,26 @@ nav.barra .invisibile { visibility: hidden; }
       box.hidden = false;
       return;
     }
+    var minimo = minimoMercato(R.reg, R.fa);
+    if (minimo !== null && R.lettera < minimo - 0.005) {
+      box.innerHTML = "È più basso di tutti i premi 2027 per la tua età e la tua regione: il più basso è " + chf(minimo, true) + " al mese. Controlla che sia il premio della sola base, prima dei sussidi e del rimborso della tassa ambientale. Se è giusto così, la pagina usa il tuo.";
+      box.hidden = false;
+      return;
+    }
     o.className = "esito-campo ok";
     o.innerHTML = ico("check", 18) + "<span>La pagina userà questo premio.</span>";
+  }
+  function minimoMercato(reg, fa) {
+    if (!reg || !fa) return null;
+    var m = null;
+    Object.keys(D.assicuratori).forEach(function (num) {
+      prodotti(num).forEach(function (x) {
+        franchigie(fa).forEach(function (f) {
+          ["N", "U"].forEach(function (inf) { var v = premio(num, x.code, reg, fa, f, inf); if (v !== null && (m === null || v < m)) m = v; });
+        });
+      });
+    });
+    return m;
   }
 
   // ── cosa ti va bene
@@ -1120,7 +1152,7 @@ nav.barra .invisibile { visibility: hidden; }
     function has(k) { return S.pref.indexOf(k) >= 0; }
     return testa("cuore", "Nel 2027, cosa ti va bene?",
         "Scegli tutto quello che accetti: la pagina ti propone solo modelli adatti. Più cose accetti, più puoi risparmiare. In caso di urgenza vai sempre dove serve, con qualsiasi modello.") +
-      '<div class="opzioni" id="g-pref">' +
+      '<div class="opzioni" id="g-pref" role="group" aria-labelledby="qt">' +
         opz("libero", "Andare da qualsiasi medico", "senza passare prima da nessuno (modello standard)", "bussola", has("libero"), "multi") +
         opz("medico", "Il medico di famiglia come primo passo", "il tuo medico deve essere nella lista della cassa", "medico", has("medico"), "multi") +
         opz("hmo", "Uno studio medico di gruppo come primo passo", "rete HMO", "gruppo", has("hmo"), "multi") +
@@ -1147,17 +1179,17 @@ nav.barra .invisibile { visibility: hidden; }
 
   // ── spese
   function pills(k, valori) {
-    return '<div class="pills" data-k="' + k + '" role="group">' + valori.map(function (v) {
+    return '<div class="pills" data-k="' + k + '" role="group" aria-labelledby="l-' + k + '">' + valori.map(function (v) {
       return '<button type="button" class="pill" data-v="' + v[0] + '" aria-pressed="' + (S[k] === v[0]) + '">' + v[1] + '</button>';
     }).join("") + '</div>';
   }
   function pSpese() {
     return testa("pulse", "Quanto usi la sanità in un anno?", "Bastano risposte all’ingrosso: servono a stimare le spese e la franchigia giusta per te.") +
-      '<div class="dom2"><div class="lbl2">Quante volte vai dal medico in un anno?</div><div class="aiuto2">visite, controlli, analisi</div>' +
+      '<div class="dom2"><div class="lbl2" id="l-visite">Quante volte vai dal medico in un anno?</div><div class="aiuto2">visite, controlli, analisi</div>' +
         pills("visite", [["0-1", "0 o 1"], ["2-5", "Da 2 a 5"], ["6+", "Più di 5"], ["nonso", "Non lo so"]]) + '</div>' +
-      '<div class="dom2"><div class="lbl2">Prendi farmaci in modo regolare?</div><div class="aiuto2">per esempio ogni mese</div>' +
+      '<div class="dom2"><div class="lbl2" id="l-farmaci">Prendi farmaci in modo regolare?</div><div class="aiuto2">per esempio ogni mese</div>' +
         pills("farmaci", [["si", "Sì"], ["no", "No"]]) + '</div>' +
-      '<div class="dom2"><div class="lbl2">Hai cure in corso o previste nel 2027?</div><div class="aiuto2">una terapia, la fisioterapia, un’operazione, lo specialista</div>' +
+      '<div class="dom2"><div class="lbl2" id="l-cure">Hai cure in corso o previste nel 2027?</div><div class="aiuto2">una terapia, la fisioterapia, un’operazione, lo specialista</div>' +
         pills("cure", [["si", "Sì"], ["no", "No"]]) + '</div>' +
       '<div class="box" id="spese-stima" aria-live="polite"></div>' +
       '<p class="nota">Aspetti un bambino? Dillo a Giorgio: dalla 13a settimana di gravidanza le cure non pagano né franchigia né aliquota.</p>';
@@ -1185,7 +1217,7 @@ nav.barra .invisibile { visibility: hidden; }
     function has(k) { return S.compl.indexOf(k) >= 0; }
     return testa("piu", "Hai anche assicurazioni complementari?",
         "Sono le coperture in più della cassa, fuori dalla base. Si chiamano LCA, dalla legge federale sul contratto d’assicurazione. Scegli tutte quelle che hai.") +
-      '<div class="opzioni" id="g-compl">' +
+      '<div class="opzioni" id="g-compl" role="group" aria-labelledby="qt">' +
         opz("dentista", "Dentista", null, "dente", has("dentista"), "multi") +
         opz("ospedale", "Ospedale", "camera semiprivata o privata", "ospedale", has("ospedale"), "multi") +
         opz("altro", "Altro", "occhiali, medicina alternativa, palestra, viaggi", "piu", has("altro"), "multi") +
@@ -1219,6 +1251,7 @@ nav.barra .invisibile { visibility: hidden; }
   }
   function verdettoFrase(R) {
     var v = R.verdetto;
+    if (v.tipo === "cambia" && R.best && R.best.stesso) return "mi conviene togliere l'infortunio dalla mia polizza, risparmio circa " + chf(v.s) + " all'anno";
     if (v.tipo === "cambia") return "mi conviene cambiare, risparmio " + (v.almeno ? "almeno " : "circa ") + chf(v.s) + " all'anno";
     if (v.tipo === "bene") return "sono già messa bene, cambiare non vale la pena";
     return "dipende " + ({ prodotto: "dal prodotto esatto che ho", premio: "da quanto pago oggi", franchigia: "dalla mia franchigia", nessuna: "dalle mie preferenze", dati: "da dati che mancano" }[v.motivo] || "");
@@ -1234,10 +1267,12 @@ nav.barra .invisibile { visibility: hidden; }
     // verdetto
     if (v.tipo === "cambia") {
       h += '<div class="verdetto"><div class="v-testa">' + ico("giu", 22) + ' Il risultato</div>' +
-        '<div class="v-tit">Ti conviene cambiare:</div>' +
+        '<div class="v-tit">' + (best.stesso ? 'Ti conviene togliere l’infortunio:' : 'Ti conviene cambiare:') + '</div>' +
         '<div class="v-pre">risparmi ' + (v.almeno ? "almeno" : "circa") + '</div>' +
         '<div class="v-cifra">' + chf(v.s) + ' <small>all’anno</small></div>' +
-        '<p class="v-sotto">con ' + esc(best.nome) + ', ' + esc(nomeProd(best.num, best.code, true)) + ', stessa franchigia di CHF ' + fmt(R.Fcmp) + '.</p>';
+        (best.stesso ?
+          '<p class="v-sotto">restando con ' + esc(best.nome) + ', ' + esc(nomeProd(best.num, best.code, true)) + ', stessa franchigia di CHF ' + fmt(R.Fcmp) + '.</p>' :
+          '<p class="v-sotto">con ' + esc(best.nome) + ', ' + esc(nomeProd(best.num, best.code, true)) + ', stessa franchigia di CHF ' + fmt(R.Fcmp) + '.</p>');
     } else if (v.tipo === "bene") {
       h += '<div class="verdetto bene"><div class="v-testa">' + ico("okcerchio", 22) + ' Il risultato</div>' +
         '<div class="v-tit">Sei già messa bene</div>' +
@@ -1259,7 +1294,7 @@ nav.barra .invisibile { visibility: hidden; }
       '<tr><td class="k">Prodotto</td><td>' + (R.prod ? esc(nomeProd(R.cassa, R.prod)) + (R.prodDedotto ? ' <span class="tag">dal premio della lettera</span>' : '') :
         R.range ? 'uno fra ' + R.range.n + ' prodotti' : 'non indicato') + '</td></tr>' +
       '<tr><td class="k">Franchigia</td><td>' + (R.F !== null ? 'CHF ' + fmt(R.F) + (R.Fdedotta ? ' <span class="tag">dal premio della lettera</span>' : '') : 'non indicata') + '</td></tr>' +
-      '<tr><td class="k">Infortunio</td><td>' + (R.infOggi === "U" ? "compreso" : "escluso") + (R.infIpotesi ? ' <span class="tag">ipotesi</span>' : R.infDedotto ? ' <span class="tag">dal premio della lettera</span>' : '') + '</td></tr>' +
+      '<tr><td class="k">Infortunio</td><td>' + (R.infIpotesi && R.fonte === "lettera" ? "non indicato" : (R.infOggi === "U" ? "compreso" : "escluso") + (R.infIpotesi ? ' <span class="tag">ipotesi</span>' : R.infDedotto ? ' <span class="tag">dal premio della lettera</span>' : '')) + '</td></tr>' +
       (R.cur !== null ?
         '<tr class="forte"><td>Al mese</td><td class="n">' + chf(R.cur, true) + '</td></tr>' +
         '<tr><td class="k">All’anno</td><td class="n">' + chf(R.cur * 12) + '</td></tr>' +
@@ -1279,7 +1314,7 @@ nav.barra .invisibile { visibility: hidden; }
         (R.infTarget === "N" ? ' (gli infortuni li copre il datore di lavoro)' : '') + ', solo modelli che ti vanno bene.</p>';
       R.alts.slice(0, 3).forEach(function (a, i) {
         h += '<div class="card alt"><div class="rk">' + (i + 1) + '</div>' +
-          '<div class="a-nome">' + esc(a.nome) + (a.num === R.cassa ? ' <span class="tag">la tua cassa</span>' : '') + '</div>' +
+          '<div class="a-nome">' + esc(a.nome) + (a.stesso ? ' <span class="tag">la tua polizza, senza infortunio</span>' : a.num === R.cassa ? ' <span class="tag">la tua cassa</span>' : '') + '</div>' +
           '<div class="a-prod">' + esc(nomeProd(a.num, a.code, true)) + (a.cat !== "libero" ? ', ' + MOD_MINUSC[a.cat] : '') + '</div>' +
           '<div class="a-cifre"><span class="a-mese">' + chf(a.v, true) + ' al mese</span>' +
           (cmpCur ? risparmioTesto((R.cur - a.v) * 12) : '<span class="nota">' + chf(a.v * 12) + ' all’anno</span>') + '</div></div>';
@@ -1305,9 +1340,9 @@ nav.barra .invisibile { visibility: hidden; }
       '<li><b>Le cure pagate.</b> Per l’assicurazione di base sono le stesse in tutte le casse: le fissa la legge.</li>' +
       '<li><b>Franchigia e aliquota.</b> Funzionano uguali dappertutto: oltre la franchigia paghi il 10&nbsp;% delle spese, al massimo ' + chf(ALIQ_MAX[R.fa]) + ' all’anno.</li>' +
       '<li><b>Le complementari.</b> Restano dove sono, se non le sposti tu.</li>' +
-      '<li><b>La copertura.</b> Se cambi, sei assicurata con la nuova cassa da ' + DATE.inizio + ', senza giorni scoperti.</li>' +
+      (best && best.stesso && v.tipo === "cambia" ? '' : '<li><b>La copertura.</b> Se cambi, sei assicurata con la nuova cassa da ' + DATE.inizio + ', senza giorni scoperti.</li>') +
       '</ul></div>';
-    if (best && v.tipo !== "bene" && best.cat !== "libero") {
+    if (best && v.tipo !== "bene" && best.cat !== "libero" && !best.stesso) {
       h += '<p class="nota">Cosa cambia con il modello ' + MOD_FRASE[best.cat] + ': ' + PRIMO_PASSO[best.cat] +
         '. Se salti il primo passo, la cassa può non pagare. Le condizioni precise sono quelle della cassa.</p>';
     }
@@ -1333,6 +1368,7 @@ nav.barra .invisibile { visibility: hidden; }
       '<div class="box privacy"><div class="tit">' + ico("lucchetto", 18) + ' Prima di inviare</div><ul>' +
         '<li>Ogni pulsante apre WhatsApp o la tua posta con il messaggio per Giorgio già scritto: lo vedi e decidi tu se mandarlo.</li>' +
         '<li>Sotto la prima riga c’è un testo <b>pieno di parentesi e virgolette</b>: è giusto così, serve al programma di Giorgio. Va mandato com’è.</li>' +
+        '<li>Delle domande su visite, farmaci e cure parte solo il livello di spese (' + LIVELLI.basso + ', ' + LIVELLI.medio + ' o ' + LIVELLI.alto + '): le singole risposte restano qui.</li>' +
         '<li>Destinatario unico: Giorgio Carrara. Finché non invii, le risposte restano su questo dispositivo.</li>' +
         '<li>Se il dispositivo non è solo tuo, dopo l’invio cancellale con il pulsante qui sotto.</li>' +
       '</ul></div>' +
@@ -1362,18 +1398,25 @@ nav.barra .invisibile { visibility: hidden; }
     var infTip = null;
     if (R.infParte && R.infParte >= 1) {
       if (R.infOggi === "U" && R.infTarget === "N") infTip = "Circa " + chf(R.infParte) + " all’anno vengono dal togliere l’infortunio, che ti copre già il datore di lavoro. Lo puoi fare anche restando nella tua cassa.";
+      else if (R.infIpotesi && R.fonte === "lettera") infTip = "Se nella tua polizza c’è anche l’infortunio, toglierlo vale circa " + chf(R.infParte) + " all’anno: ti copre già il datore di lavoro.";
       else if (R.infIpotesi) infTip = "Ho calcolato il tuo premio senza infortunio. Se sulla polizza c’è, toglierlo vale altri " + chf(R.infParte) + " all’anno circa.";
       else if (S.lavoro === "nonso") infTip = "Se lavori almeno 8 ore a settimana per lo stesso datore, puoi togliere l’infortunio: circa " + chf(R.infParte) + " in meno all’anno.";
     }
     var modTip = R.altroModello ? "Se ti andasse bene anche il modello " + MOD_FRASE[R.altroModello.alt.cat] +
       ", con " + esc(R.altroModello.alt.nome) + " pagheresti " + chf(R.altroModello.alt.v, true) + " al mese: circa " + chf(R.altroModello.s) + " in meno all’anno." : null;
-    var medTip = best && (best.cat === "medico" || best.cat === "flex") && v.tipo === "cambia" ? "Prima di firmare, controlla che il tuo medico sia nella lista della nuova cassa: Giorgio lo verifica con te." : null;
+    var medTip = best && !best.stesso && (best.cat === "medico" || best.cat === "flex") && v.tipo === "cambia" ? "Prima di firmare, controlla che il tuo medico sia nella lista della nuova cassa: Giorgio lo verifica con te." : null;
 
-    if (v.tipo === "cambia") {
+    if (v.tipo === "cambia" && best.stesso) {
+      out.push("Se togli l’infortunio dalla tua polizza paghi " + chf(best.v, true) + " al mese invece di " + chf(R.cur, true) + ": circa " + chf(v.s) + " in meno all’anno.");
+      out.push("Resti nella tua cassa e nel tuo prodotto. Gli infortuni li copre già l’assicurazione del datore di lavoro.");
+      extra = [frTip, modTip, "Le cure pagate sono le stesse: per l’assicurazione di base le fissa la legge, uguali per tutte le casse."];
+    } else if (v.tipo === "cambia") {
       out.push(v.almeno ?
         "Con " + nomeBest + " paghi " + chf(best.v, true) + " al mese. Anche con il prodotto più economico che potresti avere oggi, sono almeno " + chf(v.s) + " in meno all’anno." :
         "Con " + nomeBest + " paghi " + chf(best.v, true) + " al mese invece di " + chf(R.cur, true) + ": circa " + chf(v.s) + " in meno all’anno.");
-      if (R.catOggi && best.cat === R.catOggi) out.push("È lo stesso tipo di modello che hai oggi (" + MOD_MINUSC[best.cat].replace(" (telefono o app)", "") + "): cambia la cassa, non il modo di curarti.");
+      var nomeMod = best.cat === R.catOggi ? MOD_MINUSC[best.cat].replace(" (telefono o app)", "") : "";
+      if (R.catOggi && best.cat === R.catOggi && best.num === R.cassa) out.push("Resti nella tua cassa, con lo stesso tipo di modello (" + nomeMod + ").");
+      else if (R.catOggi && best.cat === R.catOggi) out.push("È lo stesso tipo di modello che hai oggi (" + nomeMod + "): cambia solo la cassa.");
       else out.push("È un modello che hai indicato fra quelli che ti vanno bene: " + PRIMO_PASSO[best.cat] + ".");
       extra = [infTip, frTip, medTip, modTip, "Le cure pagate sono le stesse: per l’assicurazione di base le fissa la legge, uguali per tutte le casse."];
     } else if (v.tipo === "bene") {
@@ -1496,6 +1539,14 @@ nav.barra .invisibile { visibility: hidden; }
         '<p>Se vuoi cambiare solo la franchigia, restando dove sei: per abbassarla scrivi alla cassa entro ' + DATE.arrivo + ', per alzarla entro ' + DATE.alzare + '.</p></div>';
     }
     var h = '<h3><span class="h-ico">' + ico("calcheck", 22) + '</span>' + (v.tipo === "cambia" ? "I passi e le date" : "Se decidi di cambiare: i passi e le date") + '</h3>';
+    if (stessa && v.tipo === "cambia" && best.stesso) {
+      return h + '<div class="card"><table class="date-tab"><thead><tr><th>Entro</th><th>Cosa</th></tr></thead><tbody>' +
+        '<tr><td class="n">' + DATE.arrivo + '</td><td>Deve arrivare alla tua cassa la richiesta scritta di togliere l’infortunio</td></tr>' +
+        '<tr><td class="n">' + DATE.inizio + '</td><td>Paghi il premio senza infortunio</td></tr></tbody></table></div>' +
+        '<ol class="passi"><li><b>Resti nella tua cassa.</b> Niente disdetta: chiedi per iscritto di togliere l’infortunio, perché ti copre già il datore di lavoro. Giorgio ti prepara il testo.</li>' +
+        '<li><b>Tieni pronta la conferma del datore di lavoro.</b> La cassa può chiederti di dimostrare che lavori almeno 8 ore a settimana per lui.</li>' +
+        '<li><b>Se smetti di lavorare o scendi sotto le 8 ore a settimana.</b> Avvisa subito la cassa: l’infortunio va rimesso.</li></ol>';
+    }
     if (stessa && v.tipo === "cambia") {
       return h + '<div class="card"><table class="date-tab"><thead><tr><th>Entro</th><th>Cosa</th></tr></thead><tbody>' +
         '<tr><td class="n">' + DATE.arrivo + '</td><td>Deve arrivare alla tua cassa la richiesta scritta di passare a ' + esc(nomeProd(best.num, best.code, true)) + '</td></tr>' +
@@ -1519,7 +1570,9 @@ nav.barra .invisibile { visibility: hidden; }
   }
 
   function notaComplementari(R) {
-    var c = S.compl, cambia = R.verdetto.tipo !== "bene";
+    // resta nella stessa cassa (altro prodotto, o la sua polizza senza infortunio): le complementari non si toccano
+    var restaInCassa = R.verdetto.tipo === "cambia" && R.best && R.best.num === R.cassa;
+    var c = S.compl, cambia = R.verdetto.tipo !== "bene" && !restaInCassa;
     if (!c.length) return cambia ? "Se hai complementari, possono restare nella cassa di oggi anche se cambi la base. Non disdirle prima di avere l’accettazione scritta della nuova cassa." : "";
     if (c.indexOf("nessuna") >= 0) return cambia ? "Non hai complementari: per cambiare ti basta spostare l’assicurazione di base." : "";
     if (c.indexOf("nonso") >= 0) return "Guarda la polizza: le complementari sono le righe oltre all’assicurazione di base (LAMal). Nel dubbio, non disdire niente oltre alla base e chiedi a Giorgio.";
@@ -1561,7 +1614,8 @@ nav.barra .invisibile { visibility: hidden; }
         lavoro_8_ore: S.lavoro, infortunio_oggi: S.infOggi,
         cassa: isCassa(S.cassa) ? Number(S.cassa) : S.cassa, modello: S.modello, prodotto: S.prodotto,
         franchigia: S.franchigia, premio_lettera: S.lettera ? Number(S.lettera) : null,
-        va_bene: S.pref, visite: S.visite, farmaci: S.farmaci, cure: S.cure, complementari: S.compl
+        // visite, farmaci e cure restano sul dispositivo: a Giorgio arriva solo il livello di spese (qui sotto)
+        va_bene: S.pref, complementari: S.compl
       },
       risultato: {
         fascia: R.fa, regione: R.reg ? Number(R.reg) : null, comune: R.luogo ? R.luogo.c : null,
